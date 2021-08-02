@@ -14,10 +14,11 @@ const LecturesListContent = (props: StaticIndexProps) => {
   return (
     <Container className={style.ContainerPadding}>
       <Accordion>
-        <Accordion.Item eventKey="0">
+        <Accordion.Item className={style.accordion} eventKey="0">
           <Accordion.Header className={style.main}>
             <div>{props.level + '00 番台'}</div>
           </Accordion.Header>
+
           <Accordion.Body>
             {props.courses.map(course => (
               <LecturesListContentCell

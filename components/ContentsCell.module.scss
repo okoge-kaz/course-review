@@ -1,20 +1,30 @@
 .ContainerPadding {
   padding-left: 9px;
   padding-right: 10px;
-}
 
-.main {
-  color: #585858;
-  font-size: 25px;
-  padding-left: 7px;
-  div {
-    font-size: 25px;
-    margin-top: 20px;
-    border-bottom: 2px solid #f1ac9d;
-    left: 22px;
-    margin-bottom: 25px;
-    // padding-top: 17px;
-    // padding-bottom: 17px;
+  .accordion{
+    border: 0px;
   }
-  
+
+  .main {
+    color: #585858;
+    font-size: 25px;
+    padding-left: 7px;
+    div {
+      color: #585858;
+      font-size: 25px;
+      margin-top: 4px;
+      border-bottom: 2px solid #f1ac9d;
+      left: 22px;
+      margin-bottom: 9px;
+      padding-top: 17px;
+      padding-bottom: 17px;
+    }
+  }
+  button {
+    .accordion-button:focus {
+      border-color: white;
+    }
+    border-bottom-color:　white;
+  }
 }
