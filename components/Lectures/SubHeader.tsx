@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styles from './SubHeader.module.scss'
-import { Jumbotron, Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 interface StaticIndexProps {
   key: number
@@ -9,9 +9,9 @@ interface StaticIndexProps {
 
 const SubHeader = (props: StaticIndexProps) => (
   <Container className={styles.ContainerPadding}>
-    <Jumbotron className={styles.JumbotronSize}>
+    <Container className={styles.JumbotronSize}>
       <h1>{(props.name)}</h1>
-    </Jumbotron>
+    </Container>
   </Container>
 )
 
