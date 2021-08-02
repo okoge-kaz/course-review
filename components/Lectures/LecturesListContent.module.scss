@@ -2,7 +2,7 @@
   padding-left: 9px;
   padding-right: 10px;
 
-  .accordion{
+  .accordion {
     border: 0px;
   }
 
@@ -19,5 +19,23 @@
       padding-top: 17px;
       padding-bottom: 17px;
     }
+  }
+
+  button {
+    :focus {
+      border-color: white;
+      display: block;
+    }
+    :not(.collapsed) {
+      color: #585858;
+      // background-color: white;
+    }
+
+    border-bottom-color: white;
+    display: block;
+  }
+  button:focus {
+    border-color: white;
+    display: block;
   }
 }
