@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Container } from 'react-bootstrap'
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 
 const Header: FC = () => (
   <Container>
