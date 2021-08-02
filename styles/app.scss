@@ -1,0 +1,7 @@
+// @use '@fontsource/noto-sans-jp';
+@use 'bootstrap/scss/bootstrap.scss' with (
+  $primary: #198754,
+  $secondary: #0d6efd,
+  $link-color: #6f42c1,
+  $font-family-sans-serif: 'Noto Sans JP',
+);

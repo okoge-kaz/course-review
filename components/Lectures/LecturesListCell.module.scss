@@ -1,0 +1,31 @@
+.main {
+  div {
+    font-size: 25px;
+    font-family: normal normal medium YuGothic;
+    color: #3e3f68;
+    background-color: #f0f2f5;
+    padding-left: 29px;
+    margin-top: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    .teachers {
+      padding: 0px;
+      margin-top: 18px;
+    }
+    .teacher {
+      text-align: left;
+      font-size: 20px;
+      font-family: YuGothic;
+      letter-spacing: 0px;
+      color: #585858;
+      opacity: 1;
+      padding: 0px;
+      margin-top: 5px;
+    }
+  }
+  .link {
+    text-decoration: none;
+    color: #3e3f68;
+  }
+}
