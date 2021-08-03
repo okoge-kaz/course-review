@@ -5,16 +5,15 @@ import Content from '../../../components/Lectures/LecturesListContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
 import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
+import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
+import Search from '../../../components/Search/LectureSearch'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
   department: Department
+  courses: CourseDetail[]
 }
-
-// interface StaticIndexProps {
-//   segments: Segment[]
-// }
 
 const DepartmentCoursesList = (props: StaticIndexProps) => {
   // if (typeof props.courseslist === 'undefined') {
@@ -27,8 +26,10 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <SubHeader key={props.department.id} name={props.department.name}/>
+      <SubHeader key={props.department.id} name={props.department.name} />
+
       <Container className="mt-4">
+        <Search {...props} />
         {(props.courseslists || []).map(courselist => (
           <Content key={courselist.level} level={courselist.level} courses={courselist.courses} />
         ))}
@@ -73,10 +74,16 @@ export const getStaticProps: GetStaticProps = async (
 
   const department = departments.find(department => department.id === parseInt(params.id))
 
+  const data = await fetch(
+    `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
+  )
+  const courses: CourseDetail[] = await data.json()
+
   return {
     props: {
       courseslists,
       department,
+      courses,
     },
   }
 }

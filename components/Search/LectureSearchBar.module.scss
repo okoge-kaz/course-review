@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  margin: 16px;
+  justify-content: space-between;
+}
+
+.filterButton {
+  padding: auto;
+  background: #f0f2f5;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+}
+
+.textSearch {
+  height: 44px;
+  padding: 4px 8px;
+  border-radius: 22px;
+  display: flex;
+  background: #f0f2f5;
+  flex: 1;
+  margin-left: 8px;
+  align-items: center;
+}
+
+.textSearchInput {
+  width: 100%;
+  font-size: 18px;
+  border: 0;
+  background-color: transparent;
+  margin-left: 8px;
+  outline: none;
+  line-height: normal;
+}
