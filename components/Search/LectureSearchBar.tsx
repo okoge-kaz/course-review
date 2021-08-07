@@ -21,7 +21,7 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
   return (
     <div className={styles.main}>
       <div className={styles.textSearch}>
-      <button
+      {/* <button
         className={styles.filterButton}
         onClick={() => {
           props.changeIsOpenFilter(!isOpenfilter)
@@ -54,7 +54,7 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
             />
           </svg>
         )}
-      </button>
+      </button> */}
         {/* よくわからん */}
         <svg xmlns="http://www.w3.org/2000/svg" width="19.997" height="20" viewBox="0 0 19.997 20">
           <path

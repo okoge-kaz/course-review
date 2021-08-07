@@ -18,6 +18,19 @@
       margin-bottom: 9px;
       padding-top: 17px;
       padding-bottom: 17px;
+      .down {
+        float: right;
+        vertical-align: middle;
+        color: #333;
+        line-height: 0.8;
+        width: 0.8em;
+        height: 0.8em;
+        border: 0.1em solid currentColor;
+        border-left: 0;
+        border-bottom: 0;
+        box-sizing: border-box;
+        transform: translateY(-25%) rotate(135deg);
+      }
     }
   }
 

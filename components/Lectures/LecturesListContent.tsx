@@ -16,7 +16,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
       <Accordion>
         <Accordion.Item className={style.accordion} eventKey="0">
           <Accordion.Header className={style.main}>
-            <div>{props.level + '00 番台'}</div>
+            <div>{props.level + '00 番台'}<span className={style.down}></span></div>
           </Accordion.Header>
 
           <Accordion.Body>

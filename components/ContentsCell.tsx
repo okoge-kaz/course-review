@@ -16,7 +16,7 @@ const ContentsCell = (props: ContentsCellProps) => {
       <Accordion>
         <Accordion.Item className={styles.accordion} eventKey="0">
           <Accordion.Header className={styles.main}>
-            <div>{props.school}</div>
+            <div>{props.school}<span className={styles.down}></span></div>
           </Accordion.Header>
 
           <Accordion.Body>

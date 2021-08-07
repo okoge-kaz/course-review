@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import { CourseDetail } from '../../interfaces/course'
 import { useState, useMemo } from 'react'
 import LectureSearchBar from './LectureSearchBar'
+import styles from './LectureSearch.module.scss'
 // LectureFilterを書く
 
 interface StaticIndexProps {
@@ -39,23 +40,27 @@ const LectureSearch = (props: StaticIndexProps) => {
         keyInputEvent={keyInputEvent}
         changeIsOpenFilter={isOpenFilter => setIsOpenfilter(isOpenFilter)}
       />
-      
+      {/* {isOpenfilter ? (
+        <LectureFilter
+          onApply={genres => setApplyedGenres(genres)}
+          onReset={() => setApplyedGenres([])}
+        />
+      ) : (
+        <></>
+      )}
+      <div className={styles.main}>
+        {filteredLectures.map(course => (
+          <LectureCell
+            key={course.id}
+            id={course.id}
+            name={course.courseName}
+            keywords={course.keywords}
+            teachers={course.teachers}
+          />
+        ))}
+      </div> */}
     </>
   )
 }
 
 export default LectureSearch
-
-// // pagesのindexフィイルではなく、このファイルはあくまでもcomponentなので、以下のように書くのではなく別の手法でデータを関数に渡さないといけない
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetch(
-//     `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
-//   )
-//   const courseDetails: CourseDetail[] = await res.json()
-//   const courses = courseDetails
-//   return {
-//     props: {
-//       courses,
-//     },
-//   }
-// }
