@@ -7,8 +7,8 @@ import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/cour
 import { Segment, Department } from '../../../interfaces/segment'
 import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
-import Search from '../../../components/Search/LectureSearch'
 import LectureSearchBar from '../../../components/Search/LectureSearchBar'
+import LecureCell from '../../../components/Search/LecureCell'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
@@ -51,13 +51,21 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       <SubHeader key={props.department.id} name={props.department.name} />
 
       <Container className="mt-4">
-        {/* <Search {...props} /> */}
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
         {isFilled ? (
-          <div>filled</div>
+          <div>
+            {filteredLectures.map(lecture => (
+              <LecureCell
+                key={lecture.id}
+                id={lecture.id}
+                name={lecture.courseName}
+                teachers={lecture.teachers}
+              />
+            ))}
+          </div>
         ) : (
           <>
             {(props.courseslists || []).map(courselist => (

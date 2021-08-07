@@ -8,6 +8,7 @@ import { Segment } from '../interfaces/segment'
 import Search from '../components/Search/LectureSearch'
 import { CourseDetail } from '../interfaces/course'
 import LectureSearchBar from '../components/Search/LectureSearchBar'
+import LecureCell from '../components/Search/LecureCell'
 
 interface StaticIndexProps {
   segments: Segment[]
@@ -45,12 +46,13 @@ const index = (props: StaticIndexProps) => {
         <Head>
           <title>Titech Info</title>
         </Head>
-        {/* <Search {...props} /> */}
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
-        {isFilled ? <div>filled</div> : <Content {...props} />}
+        {isFilled ? <div>{filteredLectures.map(lecture => (
+          <LecureCell key={lecture.id} id={lecture.id} name={lecture.courseName} teachers={lecture.teachers}/>
+        ))}</div> : <Content {...props} />}
       </Container>
     </div>
   )
