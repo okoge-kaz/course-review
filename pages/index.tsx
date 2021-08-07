@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useMemo } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Container } from 'react-bootstrap'
@@ -7,6 +7,7 @@ import Content from '../components/Content'
 import { Segment } from '../interfaces/segment'
 import Search from '../components/Search/LectureSearch'
 import { CourseDetail } from '../interfaces/course'
+import LectureSearchBar from '../components/Search/LectureSearchBar'
 
 interface StaticIndexProps {
   segments: Segment[]
@@ -14,6 +15,29 @@ interface StaticIndexProps {
 }
 
 const index = (props: StaticIndexProps) => {
+  const [searchText, setSearchText] = useState('')
+  const [applyedGenres, setApplyedGenres] = useState<string[]>([])
+  const [isFilled, setIsFilled] = useState(false)
+
+  const keyInputEvent = (text: string) => {
+    setSearchText(text)
+  }
+
+  const filteredLectures = useMemo(
+    () =>
+      props.courses
+        .filter(course =>
+          course.courseName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+        )
+        .filter(course => {
+          if (applyedGenres.length === 0) {
+            return true
+          }
+          const genres = course.keywords
+          return genres.some(genre => applyedGenres.includes(genre))
+        }),
+    [props.courses, searchText, applyedGenres],
+  )
   return (
     <div>
       <SubHead />
@@ -21,8 +45,12 @@ const index = (props: StaticIndexProps) => {
         <Head>
           <title>Titech Info</title>
         </Head>
-        <Search {...props} />
-        <Content {...props} />
+        {/* <Search {...props} /> */}
+        <LectureSearchBar
+          keyInputEvent={keyInputEvent}
+          changeIsFilled={isFilled => setIsFilled(isFilled)}
+        />
+        {isFilled ? <div>filled</div> : <Content {...props} />}
       </Container>
     </div>
   )

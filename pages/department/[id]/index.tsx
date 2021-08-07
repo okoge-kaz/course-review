@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useMemo } from 'react'
 import SubHeader from '../../../components/Lectures/SubHeader'
 import { Container } from 'react-bootstrap'
 import Content from '../../../components/Lectures/LecturesListContent'
@@ -8,6 +8,7 @@ import { Segment, Department } from '../../../interfaces/segment'
 import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
 import Search from '../../../components/Search/LectureSearch'
+import LectureSearchBar from '../../../components/Search/LectureSearchBar'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
@@ -16,10 +17,31 @@ interface StaticIndexProps {
 }
 
 const DepartmentCoursesList = (props: StaticIndexProps) => {
-  // if (typeof props.courseslist === 'undefined') {
-  //   return <></>
-  // }
   const title = 'Titech Info: 逆評定'
+
+  const [searchText, setSearchText] = useState('')
+  const [applyedGenres, setApplyedGenres] = useState<string[]>([])
+  const [isFilled, setIsFilled] = useState(false)
+
+  const keyInputEvent = (text: string) => {
+    setSearchText(text)
+  }
+
+  const filteredLectures = useMemo(
+    () =>
+      props.courses
+        .filter(course =>
+          course.courseName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+        )
+        .filter(course => {
+          if (applyedGenres.length === 0) {
+            return true
+          }
+          const genres = course.keywords
+          return genres.some(genre => applyedGenres.includes(genre))
+        }),
+    [props.courses, searchText, applyedGenres],
+  )
 
   return (
     <>
@@ -29,10 +51,24 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       <SubHeader key={props.department.id} name={props.department.name} />
 
       <Container className="mt-4">
-        <Search {...props} />
-        {(props.courseslists || []).map(courselist => (
-          <Content key={courselist.level} level={courselist.level} courses={courselist.courses} />
-        ))}
+        {/* <Search {...props} /> */}
+        <LectureSearchBar
+          keyInputEvent={keyInputEvent}
+          changeIsFilled={isFilled => setIsFilled(isFilled)}
+        />
+        {isFilled ? (
+          <div>filled</div>
+        ) : (
+          <>
+            {(props.courseslists || []).map(courselist => (
+              <Content
+                key={courselist.level}
+                level={courselist.level}
+                courses={courselist.courses}
+              />
+            ))}
+          </>
+        )}
       </Container>
     </>
   )
