@@ -23,6 +23,8 @@ const index = (props: StaticIndexProps) => {
     setSearchText(text)
   }
 
+  const title = "逆評定 - Titech Info : 東工大情報サイト"
+
   const filteredLectures = useMemo(
     () =>
       props.courses
@@ -43,7 +45,7 @@ const index = (props: StaticIndexProps) => {
       <SubHead />
       <Container className="mt-4">
         <Head>
-          <title>Titech Info</title>
+          <title>{title}</title>
         </Head>
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
