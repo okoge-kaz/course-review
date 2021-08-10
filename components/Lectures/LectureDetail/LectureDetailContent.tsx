@@ -11,7 +11,7 @@ interface StaticIndexProps {
 
 const LecturesListContent = (props: StaticIndexProps) => {
   return (
-    <div className={styles.Container}>
+    <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.title}>基本情報</div>
 
