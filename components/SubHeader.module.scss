@@ -1,5 +1,8 @@
-.JumbotronSize {
+.Container {
   background-color: #f1ac9d;
+  margin-right: auto;
+  margin-left: auto;
+  
   h1 {
     font-size: 30px;
     color: #ffffff;
@@ -19,7 +22,18 @@
   padding-right: 22px;
 }
 
-.ContainerPadding {
-  padding-left: 0px;
-  padding-right: 0px;
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
+  }
 }

@@ -10,9 +10,34 @@
   font-style: normal;
   font-size: 35px;
   letter-spacing: 0px;
-  
-.link {
-  text-decoration: none;
-  color: #78ea4e;
+
+  .link {
+    text-decoration: none;
+    color: #78ea4e;
+  }
 }
+
+.Container {
+  margin-right: auto;
+  margin-left: auto;
+
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-right: 22px;
+}
+
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
+  }
 }

@@ -1,24 +1,39 @@
-.ContainerPadding {
-  padding-left: 0px;
-  padding-right: 0px;
-  .JumbotronSize {
-    background-color: #f1ac9d;
-    h1 {
-      font-size: 30px;
-      color: #ffffff;
-      font-family: YuGothic;
-      font-weight: bold;
-    }
-    p {
-      color: #ffffff;
-      font-family: YuGothic;
-      font-size: 24px;
-      margin-bottom: 0px;
-    }
+.Container {
+  background-color: #f1ac9d;
+  margin-right: auto;
+  margin-left: auto;
+  
+  h1 {
+    font-size: 30px;
+    color: #ffffff;
+    font-family: YuGothic;
+    font-weight: bold;
+  }
+  p {
+    color: #ffffff;
+    font-family: YuGothic;
+    font-size: 24px;
     margin-bottom: 0px;
-    padding-top: 29px;
-    padding-left: 20px;
-    padding-bottom: 19px;
-    padding-right: 22px;
+  }
+  margin-bottom: 0px;
+  padding-top: 29px;
+  padding-left: 20px;
+  padding-bottom: 19px;
+  padding-right: 22px;
+}
+
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
   }
 }

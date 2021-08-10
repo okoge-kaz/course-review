@@ -1,6 +1,9 @@
-.ContainerPadding {
+.Container {
   padding-left: 7px;
   padding-right: 7px;
+  margin-right: auto;
+  margin-left: auto;
+
   .main {
     font-size: 20px;
     font-family: YuGothic;
@@ -40,5 +43,21 @@
       }
       margin-top: 45px;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
   }
 }

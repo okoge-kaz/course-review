@@ -1,6 +1,5 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './SubHeader.module.scss'
-import { Container } from 'react-bootstrap'
 
 interface StaticIndexProps {
   key: number
@@ -8,11 +7,9 @@ interface StaticIndexProps {
 }
 
 const SubHeader = (props: StaticIndexProps) => (
-  <Container className={styles.ContainerPadding}>
-    <Container className={styles.JumbotronSize}>
-      <h1>{(props.name)}</h1>
-    </Container>
-  </Container>
+  <div className={styles.Container}>
+    <h1>{props.name}</h1>
+  </div>
 )
 
 export default SubHeader

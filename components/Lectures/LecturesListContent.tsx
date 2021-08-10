@@ -2,7 +2,7 @@ import style from './LecturesListContent.module.scss'
 import React from 'react'
 import { Container, Accordion } from 'react-bootstrap'
 import LecturesListContentCell from './LecturesListCell'
-import { DepartmentCoursesListWithLevel, Course } from '../../interfaces/courselist'
+import { Course } from '../../interfaces/courselist'
 
 interface StaticIndexProps {
   key: number

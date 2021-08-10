@@ -1,5 +1,4 @@
 import { KeyboardEvent, useState } from 'react'
-import { propTypes } from 'react-bootstrap/esm/Image'
 import styles from './LectureSearchBar.module.scss'
 
 type LectureSeachBarProps = {

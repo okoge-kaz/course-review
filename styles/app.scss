@@ -5,3 +5,30 @@
   $link-color: #6f42c1,
   $font-family-sans-serif: 'Noto Sans JP',
 );
+
+.Container {
+  margin-right: auto;
+  margin-left: auto;
+
+  margin-bottom: 0px;
+  padding-top: 29px;
+  // padding-left: 20px;
+  padding-bottom: 19px;
+  // padding-right: 22px;
+}
+
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
+  }
+}

@@ -1,10 +1,7 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
 import SubHeader from '../../../components/Lectures/LectureDetail/SubHeader'
 import Content from '../../../components/Lectures/LectureDetail/LectureDetailContent'
-import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/courselist'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
-import { Segment, Department } from '../../../interfaces/segment'
 import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
 
@@ -27,14 +24,14 @@ const CourseDetailContent = (props: StaticIndexProps) => {
           name={props.course.courseName}
           teachers={props.course.teachers}
         />
-        <Container className="mt-4">
+        <div className="Container">
           <Content
             key={props.course.id}
             id={props.course.id}
             name={props.course.courseName}
             teachers={props.course.teachers}
           />
-        </Container>
+        </div>
       </div>
     </>
   )

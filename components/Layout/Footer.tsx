@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Container } from 'react-bootstrap'
 import styles from './Footer.module.scss'
 import Link from 'next/link'
 

@@ -1,6 +1,5 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './SubHeader.module.scss'
-import { Container } from 'react-bootstrap'
 
 interface StaticIndexProps {
   key: string
@@ -10,17 +9,13 @@ interface StaticIndexProps {
 }
 
 const SubHeader = (props: StaticIndexProps) => {
-  const displayTeachers = (props.teachers).length > 1 ?(props.teachers[0] + ' 他') : props.teachers[0]
+  const displayTeachers = props.teachers.length > 1 ? props.teachers[0] + ' 他' : props.teachers[0]
   return (
-    <Container className={styles.ContainerPadding}>
-    <Container className={styles.JumbotronSize}>
+    <div className={styles.Container}>
       <h1>{props.name}</h1>
       <p>教員：{displayTeachers}</p>
-    </Container>
-  </Container>
-)
-
+    </div>
+  )
 }
-  
 
 export default SubHeader

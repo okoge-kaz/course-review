@@ -2,7 +2,7 @@ import { Department } from '../interfaces/segment'
 import styles from './ContentsCell.module.scss'
 import React from 'react'
 import DepartmentCell from './DepartmentCell'
-import { Container, Accordion } from 'react-bootstrap'
+import { Accordion } from 'react-bootstrap'
 
 type ContentsCellProps = {
   key: string
@@ -12,7 +12,7 @@ type ContentsCellProps = {
 
 const ContentsCell = (props: ContentsCellProps) => {
   return (
-    <Container className={styles.ContainerPadding}>
+    <div className={styles.ContainerPadding}>
       <Accordion>
         <Accordion.Item className={styles.accordion} eventKey="0">
           <Accordion.Header className={styles.main}>
@@ -26,7 +26,7 @@ const ContentsCell = (props: ContentsCellProps) => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-    </Container>
+    </div>
   )
 }
 

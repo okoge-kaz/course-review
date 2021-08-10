@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './LectureDetailContent.module.scss'
-import { Container } from 'react-bootstrap'
 import Image from 'next/image'
 
 interface StaticIndexProps {
@@ -12,7 +11,7 @@ interface StaticIndexProps {
 
 const LecturesListContent = (props: StaticIndexProps) => {
   return (
-    <Container className={styles.ContainerPadding}>
+    <div className={styles.Container}>
       <div className={styles.main}>
         <div className={styles.title}>基本情報</div>
 
@@ -89,7 +88,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <Image src="/image/evaluation.png" width="329" height="400" alt="evaluation" />
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 

@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { Container } from 'react-bootstrap'
 import SubHead from '../components/SubHeader'
 import Content from '../components/Content'
 import { Segment } from '../interfaces/segment'
@@ -43,7 +42,7 @@ const index = (props: StaticIndexProps) => {
   return (
     <div>
       <SubHead />
-      <Container className="mt-4">
+      <div className="Container">
         <Head>
           <title>{title}</title>
         </Head>
@@ -54,7 +53,7 @@ const index = (props: StaticIndexProps) => {
         {isFilled ? <div>{filteredLectures.map(lecture => (
           <LecureCell key={lecture.id} id={lecture.id} name={lecture.courseName} teachers={lecture.teachers}/>
         ))}</div> : <Content {...props} />}
-      </Container>
+      </div>
     </div>
   )
 }

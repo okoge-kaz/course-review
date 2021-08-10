@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react'
 import SubHeader from '../../../components/Lectures/SubHeader'
-import { Container } from 'react-bootstrap'
 import Content from '../../../components/Lectures/LecturesListContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
 import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/courselist'
@@ -50,7 +49,7 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       </Head>
       <SubHeader key={props.department.id} name={props.department.name} />
 
-      <Container className="mt-4">
+      <div className="Container">
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
@@ -77,7 +76,7 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
             ))}
           </>
         )}
-      </Container>
+      </div>
     </>
   )
 }
