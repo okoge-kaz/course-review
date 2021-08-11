@@ -2,12 +2,13 @@ import { useState, useMemo } from 'react'
 import SubHeader from '../../../components/Lectures/SubHeader'
 import Content from '../../../components/Lectures/LecturesListContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
-import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/courselist'
+import { DepartmentCoursesListWithLevel } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
 import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
 import LectureSearchBar from '../../../components/Search/LectureSearchBar'
 import LecureCell from '../../../components/Search/LecureCell'
+import styles from '../../../styles/index.module.scss'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
@@ -49,13 +50,13 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       </Head>
       <SubHeader key={props.department.id} name={props.department.name} />
 
-      <div className="Container">
+      <div>
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
         {isFilled ? (
-          <div>
+          <div className={styles.Container}>
             {filteredLectures.map(lecture => (
               <LecureCell
                 key={lecture.id}

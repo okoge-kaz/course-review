@@ -1,22 +1,24 @@
-.ButtonIcon {
-  margin-right: 0.5rem;
+.Container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-bottom: 19px;
+  padding-right: 22px;
 }
 
-.JumbotronSize {
-  background-color: #f1ac9d;
-  h1 {
-    font-size: 30px;
-    color: #ffffff;
-  }
-  p {
-    color: #ffffff;
-    font: normal normal medium YuGothic;
-    font-size: 20px;
-    margin-bottom: 0px;
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
   }
 }
-
-.container {
-  padding-left: 0px;
-  padding-right: 0px;
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
+  }
 }

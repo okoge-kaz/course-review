@@ -1,10 +1,10 @@
-.ContainerPadding {
-  padding-left: 9px;
-  padding-right: 10px;
-
-  .accordion {
-    border: 0px;
-  }
+.Container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-bottom: 19px;
+  padding-right: 22px;
 
   .main {
     color: #585858;
@@ -18,37 +18,22 @@
       margin-bottom: 9px;
       padding-top: 17px;
       padding-bottom: 17px;
-      .down {
-        float: right;
-        vertical-align: middle;
-        color: #333;
-        line-height: 0.8;
-        width: 0.8em;
-        height: 0.8em;
-        border: 0.1em solid currentColor;
-        border-left: 0;
-        border-bottom: 0;
-        box-sizing: border-box;
-        transform: translateY(-25%) rotate(135deg);
-      }
     }
   }
+}
 
-  button {
-    :focus {
-      border-color: white;
-      display: block;
-    }
-    :not(.collapsed) {
-      color: #585858;
-      // background-color: white;
-    }
-
-    border-bottom-color: white;
-    display: block;
+@media (min-width: 768px) {
+  .Container {
+    width: 750px;
   }
-  button:focus {
-    border-color: white;
-    display: block;
+}
+@media (min-width: 992px) {
+  .Container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Container {
+    width: 1170px;
   }
 }

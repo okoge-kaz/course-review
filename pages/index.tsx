@@ -7,6 +7,7 @@ import { Segment } from '../interfaces/segment'
 import { CourseDetail } from '../interfaces/course'
 import LectureSearchBar from '../components/Search/LectureSearchBar'
 import LecureCell from '../components/Search/LecureCell'
+import styles from '../styles/index.module.scss'
 
 interface StaticIndexProps {
   segments: Segment[]
@@ -22,7 +23,7 @@ const index = (props: StaticIndexProps) => {
     setSearchText(text)
   }
 
-  const title = "逆評定 - Titech Info : 東工大情報サイト"
+  const title = '逆評定 - Titech Info : 東工大情報サイト'
 
   const filteredLectures = useMemo(
     () =>
@@ -50,9 +51,20 @@ const index = (props: StaticIndexProps) => {
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
-        {isFilled ? <div>{filteredLectures.map(lecture => (
-          <LecureCell key={lecture.id} id={lecture.id} name={lecture.courseName} teachers={lecture.teachers}/>
-        ))}</div> : <Content {...props} />}
+        {isFilled ? (
+          <div className={styles.Container}>
+            {filteredLectures.map(lecture => (
+              <LecureCell
+                key={lecture.id}
+                id={lecture.id}
+                name={lecture.courseName}
+                teachers={lecture.teachers}
+              />
+            ))}
+          </div>
+        ) : (
+          <Content {...props} />
+        )}
       </div>
     </div>
   )
