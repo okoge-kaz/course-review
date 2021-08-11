@@ -14,12 +14,12 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
 
     props.keyInputEvent(e.currentTarget.value)
   }
+
   const setIsFilled = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.changeIsFilled((e.target.value).length > 0)
+    props.changeIsFilled(e.target.value.length > 0)
   }
 
   const [composing, setComposing] = useState(false)
-  // const [isFilled, setIsFilled] = useState(false)
 
   return (
     <div className={styles.main}>

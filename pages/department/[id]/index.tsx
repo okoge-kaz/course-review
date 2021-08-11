@@ -20,28 +20,27 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
   const title = 'Titech Info: 逆評定'
 
   const [searchText, setSearchText] = useState('')
-  const [applyedGenres, setApplyedGenres] = useState<string[]>([])
+  // const [applyedGenres, setApplyedGenres] = useState<string[]>([])
   const [isFilled, setIsFilled] = useState(false)
 
   const keyInputEvent = (text: string) => {
     setSearchText(text)
   }
 
-  const filteredLectures = useMemo(
-    () =>
-      props.courses
-        .filter(course =>
-          course.courseName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
-        )
-        .filter(course => {
-          if (applyedGenres.length === 0) {
-            return true
-          }
-          const genres = course.keywords
-          return genres.some(genre => applyedGenres.includes(genre))
-        }),
-    [props.courses, searchText, applyedGenres],
-  )
+  const filteredLectures = useMemo(() => {
+    if (searchText.length === 0) {
+      return []
+    }
+    const splitSearchText = searchText.replace('　', ' ').split(' ')
+
+    return props.courses.filter(course =>
+      splitSearchText.every(searchword =>
+        course.keywords.some(keyword =>
+          keyword.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+        ),
+      ),
+    )
+  }, [props.courses, searchText])
 
   return (
     <>
