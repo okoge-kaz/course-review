@@ -166,7 +166,7 @@ const questionPapersRetrieveText = (questionPapersRetrieve: QuestionPapersRetrie
 
 const LecturesListContent = (props: StaticIndexProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <div className={styles.main}>
         <div className={styles.title}>基本情報</div>
 
@@ -175,7 +175,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
             <span className={styles.subtitle}>教員</span>
             <span className={styles.teachersList}>{props.courseReview.teachers.join(', ')}</span>
           </p>
-          <p>
+          {/* <p>
             {' '}
             <span className={styles.subtitle}>講義コード </span>
             <span className={styles.teachersList}>{props.courseReview.courseNumber}</span>
@@ -183,25 +183,27 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <p>
             <span className={styles.subtitle}>開講年度 </span>
             <span className={styles.teachersList}>{props.courseReview.year}年度</span>
-          </p>
+          </p> */}
           <p>
-            <div className={styles.subtitle}>総合評価</div>
-            {props.courseReview.reviewersEvaluation.distributes.map(distribute => (
-              <div key={distribute.item}>
-                <label
-                  htmlFor={reviewersEvaluationText(distribute.item)}
-                  className={styles.progressLabel}
-                >
-                  {reviewersEvaluationText(distribute.item)}
-                </label>
-                <progress
-                  id={reviewersEvaluationText(distribute.item)}
-                  max="100"
-                  value={distribute.percent}
-                  className={styles.progress}
-                ></progress>
-              </div>
-            ))}
+            <div className={styles.content}>
+              <div className={styles.subtitle}>総合評価</div>
+              {props.courseReview.reviewersEvaluation.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  <label
+                    htmlFor={reviewersEvaluationText(distribute.item)}
+                    className={styles.progressLabel}
+                  >
+                    {reviewersEvaluationText(distribute.item)}
+                  </label>
+                  <progress
+                    id={reviewersEvaluationText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                </div>
+              ))}
+            </div>
           </p>
         </div>
 
@@ -233,7 +235,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
         <div className={styles.title}>詳細情報</div>
 
         <div className={styles.content}>
-          <div className={styles.subtitle}>わかりやすさ</div>
+          <div className={styles.subtitle}>授業のわかりやすさ</div>
           {props.courseReview.understandability.distributes.map(distribute => (
             <div key={distribute.item} className={styles.progressDiv}>
               <label
@@ -316,10 +318,10 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <li>{props.courseReview.enReportWords}</li>
         </div>
 
-        <div className={styles.content}>
+        {/* <div className={styles.content}>
           <div className={styles.subtitle}>単位取得率</div>
           <li>{props.courseReview.passRate}%</li>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
-.container {
-  padding-left: 19px;
-  padding-right: 19px;
+.Container {
   margin-right: auto;
   margin-left: auto;
-
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-bottom: 19px;
+  padding-right: 22px;
   .main {
     font-size: 20px;
     font-family: YuGothic;
@@ -24,7 +25,7 @@
       padding-top: 8px;
       padding-bottom: 17px;
     }
-    div .teachersList {
+    .teachersList {
       display: inline-block;
       padding-left: 35px;
       margin-left: 30px;
@@ -58,18 +59,16 @@
     }
     .progress::after {
       display: inline;
-      content: attr(value)'%';
+      content: attr(value) '%';
     }
     ::-webkit-progress-bar {
-      background-color:rgb(240, 240, 240);
+      background-color: rgb(240, 240, 240);
     }
     ::-webkit-progress-value {
-      background-color:#f1ac9d;
+      background-color: #f1ac9d;
     }
-    
   }
 }
-
 
 @media (min-width: 768px) {
   .Container {
