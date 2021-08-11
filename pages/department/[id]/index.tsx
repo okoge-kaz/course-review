@@ -50,7 +50,7 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
       </Head>
       <SubHeader key={props.department.id} name={props.department.name} />
 
-      <div>
+      <div className="Container">
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
