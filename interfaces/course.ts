@@ -44,7 +44,7 @@ export const Understandability = {
   Difficult: 2,
   Soso: 3,
   Easy: 4,
-  VeryEast: 5,
+  VeryEasy: 5,
 } as const
 
 export type Understandability = typeof Understandability[keyof typeof Understandability]
