@@ -18,9 +18,7 @@ const LecturesListContentCell = (props: StaticIndexProps) => {
           <div>
             {props.name}
             <div className={styles.teachers}>
-              {props.teachers.map(teacher => (
-                <div className={styles.teacher}>{teacher}</div>
-              ))}
+              {props.teachers.join(', ')}
             </div>
           </div>
         </a>
