@@ -8,8 +8,13 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
+          <meta charSet="utf-8" />
+          <meta property="og:title" content="逆評定 - Titech Info : 東工大情報サイト" />
           <meta property="twitter:card" content="summary_large_image" />
-          <meta property="og:image" content="https://titech.info/images/twitter-ogp.jpg" />
+          <meta
+            property="og:image"
+            content="https://course-review-tmp.titech.info/images/course-review-ogp.png"
+          />
           <meta property="og:title" content="Titech Info" />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           <link
