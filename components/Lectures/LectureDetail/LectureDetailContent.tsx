@@ -284,15 +284,37 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <div className={styles.subtitle}>点数</div>
           {props.courseReview.grade.distributes.map(distribute => (
             <div key={distribute.item} className={styles.progressDiv}>
-              <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
-                {gradeText(distribute.item)}
-              </label>
-              <progress
-                id={gradeText(distribute.item)}
-                max="100"
-                value={distribute.percent}
-                className={styles.progress}
-              ></progress>
+              {distribute.item === 6 && distribute.percent > 0 ? (
+                distribute.item === 6 || 1 ? (
+                  <>
+                    <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
+                      {gradeText(distribute.item)}
+                    </label>
+                    <progress
+                      id={gradeText(distribute.item)}
+                      max="100"
+                      value={distribute.percent}
+                      className={styles.progress}
+                    ></progress>
+                  </>
+                ) : (
+                  <></>
+                )
+              ) : distribute.item !== 6 ? (
+                <>
+                  <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
+                    {gradeText(distribute.item)}
+                  </label>
+                  <progress
+                    id={gradeText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           ))}
         </div>
