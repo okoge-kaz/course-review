@@ -4,6 +4,7 @@ import Content from '../../../components/Lectures/LectureDetail/LectureDetailCon
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
 import { CourseDetail, CourseAssessment } from '../../../interfaces/course'
 import Head from 'next/head'
+import NoInformation from '../../../components/Lectures/LectureDetail/NoInformation'
 
 interface StaticIndexProps {
   courseAssessment: CourseAssessment
@@ -17,7 +18,7 @@ const CourseDetailContent = (props: StaticIndexProps) => {
         <Head>
           <title>{title}</title>
         </Head>
-        <div className="Container">情報なし</div>
+        <NoInformation></NoInformation>
       </>
     )
   }
