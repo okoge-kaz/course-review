@@ -298,6 +298,11 @@ const LecturesListContent = (props: StaticIndexProps) => {
         </div>
 
         <div className={styles.content}>
+          <div className={styles.subtitle}>単位取得率</div>
+          <li>{props.courseReview.passRate}%</li>
+        </div>
+
+        <div className={styles.content}>
           <div className={styles.subtitle}>試験問題は持ち帰れたか</div>
           {props.courseReview.questionPapersRetrieve === 1 ? (
             <li>持ち帰れた</li>
@@ -317,11 +322,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <div className={styles.subtitle}>レポート字数(English)</div>
           <li>{props.courseReview.enReportWords}</li>
         </div>
-
-        {/* <div className={styles.content}>
-          <div className={styles.subtitle}>単位取得率</div>
-          <li>{props.courseReview.passRate}%</li>
-        </div> */}
       </div>
     </div>
   )
