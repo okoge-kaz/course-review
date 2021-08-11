@@ -1,6 +1,5 @@
 import style from './LecturesListContent.module.scss'
 import React from 'react'
-import { Container, Accordion } from 'react-bootstrap'
 import LecturesListContentCell from './LecturesListCell'
 import { Course } from '../../interfaces/courselist'
 
@@ -21,7 +20,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
     return 0;
   })
   return (
-    <Container className={style.Container}>
+    <div className={style.Container}>
       <div className={style.main}>
         <div>{props.level + '00 番台'}</div>
       </div>
@@ -36,7 +35,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
           />
         ))}
       </div>
-    </Container>
+    </div>
   )
 }
 
