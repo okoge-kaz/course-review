@@ -27,7 +27,7 @@ const App: FC<AppProps> = props => {
         <meta property="og:title" content="逆評定 - Titech Info : 東工大情報サイト" />
         <meta
           property="og:image"
-          content="https://course-review-tmp.titech.info/images/course-review-ogp.png/"
+          content="https://course-review-tmp.titech.info/images/course-review-ogp.png"
         />
       </Head>
       <Component {...pageProps} />
