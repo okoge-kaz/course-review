@@ -2,16 +2,25 @@ import React from 'react'
 import SubHeader from '../../../components/Lectures/LectureDetail/SubHeader'
 import Content from '../../../components/Lectures/LectureDetail/LectureDetailContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
-import { CourseDetail } from '../../../interfaces/course'
+import { CourseDetail, CourseAssessment } from '../../../interfaces/course'
 import Head from 'next/head'
 
 interface StaticIndexProps {
-  course: CourseDetail
+  courseAssessment: CourseAssessment
 }
 
 const CourseDetailContent = (props: StaticIndexProps) => {
   const title = 'Titech Info: 逆評定'
-
+  if (typeof props.courseAssessment === 'undefined') {
+    return (
+      <>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <div className="Container">情報なし</div>
+      </>
+    )
+  }
   return (
     <>
       <Head>
@@ -19,17 +28,15 @@ const CourseDetailContent = (props: StaticIndexProps) => {
       </Head>
       <div>
         <SubHeader
-          key={props.course.id}
-          id={props.course.id}
-          name={props.course.courseName}
-          teachers={props.course.teachers}
+          key={props.courseAssessment.courseId}
+          id={props.courseAssessment.courseId}
+          name={props.courseAssessment.courseName}
+          teachers={props.courseAssessment.teachers}
         />
         <div className="Container">
           <Content
-            key={props.course.id}
-            id={props.course.id}
-            name={props.course.courseName}
-            teachers={props.course.teachers}
+            key={props.courseAssessment.courseId}
+            courseReview={props.courseAssessment}
           />
         </div>
       </div>
@@ -54,14 +61,22 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext<{ id: string }>,
 ) => {
   const params = context.params!
-  const res = await fetch(
-    `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
-  )
-  const courseDetails: CourseDetail[] = await res.json()
-  const course = courseDetails.find(couseDetail => couseDetail.id === params.id)
-  return {
-    props: {
-      course,
-    },
+  try {
+    const res = await fetch(
+      `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/course/${params.id}.json`,
+    )
+    const courseAssessment: CourseAssessment = await res.json()
+    return {
+      props: {
+        courseAssessment,
+      },
+    }
+  } catch (err) {
+    return {
+      props: {
+        courseId: params.id,
+        courseName: '情報なし科目',
+      },
+    }
   }
 }

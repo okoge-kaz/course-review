@@ -1,12 +1,10 @@
 import React from 'react'
 import styles from './LectureDetailContent.module.scss'
 import Image from 'next/image'
+import { CourseAssessment } from '../../../interfaces/course'
 
 interface StaticIndexProps {
-  key: string
-  id: string
-  name: string
-  teachers: string[]
+  courseReview: CourseAssessment
 }
 
 const LecturesListContent = (props: StaticIndexProps) => {
@@ -18,11 +16,19 @@ const LecturesListContent = (props: StaticIndexProps) => {
         <div>
           <p>
             <span className={styles.subtitle}>教員</span>
+
             <span className={styles.teachersList}>
-              {(props.teachers || []).map(teacher => (
-                <span>{teacher + ' '}</span>
-              ))}
+              {props.courseReview.teachers.join(', ')}
             </span>
+          </p>
+          <p>
+            {' '}
+            <span className={styles.subtitle}>講義コード </span>
+            <span className={styles.teachersList}>{props.courseReview.courseNumber}</span>
+          </p>
+          <p>
+            <span className={styles.subtitle}>開講年度 </span>
+            <span className={styles.teachersList}>{props.courseReview.year}年度</span>
           </p>
           <p>
             <div className={styles.subtitle}>総合評価</div>
@@ -35,23 +41,23 @@ const LecturesListContent = (props: StaticIndexProps) => {
         <div>
           <div className={styles.content}>
             <div className={styles.subtitle}>良い点</div>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
+            {(props.courseReview.goodPoints || []).map(goodpoint => (
+              <li>{goodpoint}</li>
+            ))}
           </div>
 
           <div className={styles.content}>
             <div className={styles.subtitle}>悪い点</div>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
+            {(props.courseReview.badPoints || []).map(badpoint => (
+              <li>{badpoint}</li>
+            ))}
           </div>
 
           <div className={styles.content}>
             <div className={styles.subtitle}>その他</div>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
-            <li>てきすとてきすとてきすとてきすとてきすと</li>
+            {(props.courseReview.otherComments || []).map(othercomment => (
+              <li>{othercomment}</li>
+            ))}
           </div>
         </div>
 
@@ -64,9 +70,9 @@ const LecturesListContent = (props: StaticIndexProps) => {
 
         <div className={styles.content}>
           <div className={styles.subtitle}>評価項目</div>
-          <li>小テスト</li>
-          <li>期末試験</li>
-          <li>中間レポート</li>
+          {(props.courseReview.assessmentMaterials || []).map(material => (
+            <li>{material}</li>
+          ))}
         </div>
 
         <div className={styles.content}>
@@ -86,6 +92,32 @@ const LecturesListContent = (props: StaticIndexProps) => {
         <div className={styles.content}>
           <div className={styles.subtitle}>点数</div>
           <Image src="/image/evaluation.png" width="329" height="400" alt="evaluation" />
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.subtitle}>試験問題は持ち帰れたか</div>
+          {props.courseReview.questionPapersRetrieve === 1 ? (
+            <li>持ち帰れた</li>
+          ) : props.courseReview.questionPapersRetrieve === 0 ? (
+            <li>持ち帰れなかった</li>
+          ) : (
+            <li>試験なし</li>
+          )}
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.subtitle}>レポート字数(日本語)</div>
+          <li>{props.courseReview.jaReportLetters}</li>
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.subtitle}>レポート字数(English)</div>
+          <li>{props.courseReview.enReportWords}</li>
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.subtitle}>単位取得率</div>
+          <li>{props.courseReview.passRate}%</li>
         </div>
       </div>
     </div>
