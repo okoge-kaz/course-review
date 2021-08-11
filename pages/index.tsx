@@ -51,16 +51,20 @@ const index = (props: StaticIndexProps) => {
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
         {isFilled ? (
-          <div className={styles.Container}>
-            {filteredLectures.map(lecture => (
-              <LecureCell
-                key={lecture.id}
-                id={lecture.id}
-                name={lecture.courseName}
-                teachers={lecture.teachers}
-              />
-            ))}
-          </div>
+          searchText.length !== 0 ? (
+            <div className={styles.Container}>
+              {filteredLectures.map(lecture => (
+                <LecureCell
+                  key={lecture.id}
+                  id={lecture.id}
+                  name={lecture.courseName}
+                  teachers={lecture.teachers}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>Enter キーを押してください</div>
+          )
         ) : (
           <Content {...props} />
         )}
