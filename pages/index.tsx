@@ -8,6 +8,7 @@ import { CourseDetail } from '../interfaces/course'
 import LectureSearchBar from '../components/Search/LectureSearchBar'
 import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
+import Warning from '../components/Search/Warning'
 
 interface StaticIndexProps {
   segments: Segment[]
@@ -63,7 +64,7 @@ const index = (props: StaticIndexProps) => {
               ))}
             </div>
           ) : (
-            <div>Enter キーを押してください</div>
+            <Warning></Warning>
           )
         ) : (
           <Content {...props} />
