@@ -14,7 +14,6 @@ import Warning from '../../../components/Search/Warning'
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
   department: Department
-  courses: CourseDetail[]
 }
 
 const DepartmentCoursesList = (props: StaticIndexProps) => {
@@ -34,14 +33,19 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
     }
     const splitSearchText = searchText.replace('　', ' ').split(' ')
 
-    return props.courses.filter(course =>
-      splitSearchText.every(searchword =>
-        course.keywords.some(keyword =>
-          keyword.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+    return props.courseslists.map(withLevelCourses => ({
+      level: withLevelCourses.level,
+      courses: withLevelCourses.courses.filter(course =>
+        splitSearchText.every(
+          text =>
+            course.courseName.toLocaleLowerCase().includes(text.toLocaleLowerCase()) ||
+            course.teachers.some(teacher =>
+              teacher.toLocaleLowerCase().includes(text.toLocaleLowerCase()),
+            ),
         ),
       ),
-    )
-  }, [props.courses, searchText])
+    }))
+  }, [props.courseslists, searchText])
 
   return (
     <>
@@ -56,16 +60,15 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
         />
         {isFilled ? (
           searchText.length !== 0 ? (
-            <div className={styles.Container}>
-              {filteredLectures.map(lecture => (
-                <LecureCell
-                  key={lecture.id}
-                  id={lecture.id}
-                  name={lecture.courseName}
-                  teachers={lecture.teachers}
+            <>
+              {filteredLectures.map(withLevellectures => (
+                <Content
+                  key={withLevellectures.level}
+                  level={withLevellectures.level}
+                  courses={withLevellectures.courses}
                 />
               ))}
-            </div>
+            </>
           ) : (
             <Warning></Warning>
           )
@@ -121,16 +124,10 @@ export const getStaticProps: GetStaticProps = async (
 
   const department = departments.find(department => department.id === parseInt(params.id))
 
-  const data = await fetch(
-    `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
-  )
-  const courses: CourseDetail[] = await data.json()
-
   return {
     props: {
       courseslists,
       department,
-      courses,
     },
   }
 }
