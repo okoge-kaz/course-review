@@ -42,11 +42,11 @@ const index = (props: StaticIndexProps) => {
 
   return (
     <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <SubHead />
       <div className="Container">
-        <Head>
-          <title>{title}</title>
-        </Head>
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
