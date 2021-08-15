@@ -35,7 +35,11 @@
     }
     div.content {
       .progressDiv {
-        padding-bottom: 0px;
+        padding-bottom: 15px;
+        .label {
+          padding-bottom: 0px;
+          padding-left: 15px;
+        }
       }
       div {
         padding-bottom: 24px;
@@ -48,19 +52,33 @@
       }
       margin-top: 45px;
     }
+    .progressContent {
+      padding-left: 10px;
+      .v_line {
+        color: #585858;
+        border-left: solid #989898;
+        border-width: 0.1em;
+        padding-bottom: 0px;
+      }
+    }
     .progressLabel {
       padding-right: 15px;
       display: block;
     }
     .progress {
       -webkit-appearance: none;
-      width: 280px;
+      max-width: 350px;
+      width: 70%;
+      min-width: 200px;
       text-align: right;
     }
-    .progress::after {
-      display: inline;
-      content: attr(value) '%';
+    span {
+      padding-left: 10px;
     }
+    // .progress::after {
+    //   display: inline;
+    //   content: attr(value) '%';
+    // }
     ::-webkit-progress-bar {
       background-color: rgb(240, 240, 240);
     }

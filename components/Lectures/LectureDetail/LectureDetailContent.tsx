@@ -187,22 +187,28 @@ const LecturesListContent = (props: StaticIndexProps) => {
           <p>
             <div className={styles.content}>
               <div className={styles.subtitle}>総合評価</div>
-              {props.courseReview.reviewersEvaluation.distributes.map(distribute => (
-                <div key={distribute.item} className={styles.progressDiv}>
-                  <label
-                    htmlFor={reviewersEvaluationText(distribute.item)}
-                    className={styles.progressLabel}
-                  >
-                    {reviewersEvaluationText(distribute.item)}
-                  </label>
-                  <progress
-                    id={reviewersEvaluationText(distribute.item)}
-                    max="100"
-                    value={distribute.percent}
-                    className={styles.progress}
-                  ></progress>
+              <div className={styles.progressContent}>
+                <div className={styles.v_line}>
+                  {props.courseReview.reviewersEvaluation.distributes.map(distribute => (
+                    <div key={distribute.item} className={styles.progressDiv}>
+                      {/* <label
+                      htmlFor={reviewersEvaluationText(distribute.item)}
+                      className={styles.progressLabel}
+                    >
+                      {reviewersEvaluationText(distribute.item)}
+                    </label> */}
+                      <div className={styles.label}>{reviewersEvaluationText(distribute.item)}</div>
+                      <progress
+                        id={reviewersEvaluationText(distribute.item)}
+                        max="100"
+                        value={distribute.percent}
+                        className={styles.progress}
+                      ></progress>
+                      <span>{distribute.percent}%</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </p>
         </div>
@@ -236,24 +242,28 @@ const LecturesListContent = (props: StaticIndexProps) => {
 
         <div className={styles.content}>
           <div className={styles.subtitle}>わかりやすさ</div>
-          {props.courseReview.understandability.distributes.map(distribute => (
-            <div key={distribute.item} className={styles.progressDiv}>
-              <label
-                htmlFor={understandabilityText(distribute.item)}
-                className={styles.progressLabel}
-              >
-                {understandabilityText(distribute.item)}
-              </label>
-              <progress
-                id={understandabilityText(distribute.item)}
-                max="100"
-                value={distribute.percent}
-                className={styles.progress}
-              >
-                {understandabilityText(distribute.item)}
-              </progress>
+          <div className={styles.progressContent}>
+            <div className={styles.v_line}>
+              {props.courseReview.understandability.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  {/* <label
+                    htmlFor={understandabilityText(distribute.item)}
+                    className={styles.progressLabel}
+                  >
+                    {understandabilityText(distribute.item)}
+                  </label> */}
+                  <div className={styles.label}>{understandabilityText(distribute.item)}</div>
+                  <progress
+                    id={understandabilityText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                  <span>{distribute.percent}%</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className={styles.content}>
@@ -265,19 +275,28 @@ const LecturesListContent = (props: StaticIndexProps) => {
 
         <div className={styles.content}>
           <div className={styles.subtitle}>試験全体の難易度</div>
-          {props.courseReview.examDifficulty.distributes.map(distribute => (
-            <div key={distribute.item} className={styles.progressDiv}>
-              <label htmlFor={examDifficultyText(distribute.item)} className={styles.progressLabel}>
-                {examDifficultyText(distribute.item)}
-              </label>
-              <progress
-                id={examDifficultyText(distribute.item)}
-                max="100"
-                value={distribute.percent}
-                className={styles.progress}
-              ></progress>
+          <div className={styles.progressContent}>
+            <div className={styles.v_line}>
+              {props.courseReview.examDifficulty.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  {/* <label
+                    htmlFor={examDifficultyText(distribute.item)}
+                    className={styles.progressLabel}
+                  >
+                    {examDifficultyText(distribute.item)}
+                  </label> */}
+                  <div className={styles.label}>{examDifficultyText(distribute.item)}</div>
+                  <progress
+                    id={examDifficultyText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                  <span>{distribute.percent}%</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* <div className={styles.content}>
@@ -289,41 +308,52 @@ const LecturesListContent = (props: StaticIndexProps) => {
 
         <div className={styles.content}>
           <div className={styles.subtitle}>点数</div>
-          {props.courseReview.grade.distributes.map(distribute => (
-            <div key={distribute.item} className={styles.progressDiv}>
-              {distribute.item === 6 && distribute.percent > 0 ? (
-                distribute.item === 6 || 1 ? (
-                  <>
-                    <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
-                      {gradeText(distribute.item)}
-                    </label>
-                    <progress
-                      id={gradeText(distribute.item)}
-                      max="100"
-                      value={distribute.percent}
-                      className={styles.progress}
-                    ></progress>
-                  </>
-                ) : (
-                  <></>
-                )
-              ) : distribute.item !== 6 ? (
-                <>
-                  <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
-                    {gradeText(distribute.item)}
-                  </label>
-                  <progress
-                    id={gradeText(distribute.item)}
-                    max="100"
-                    value={distribute.percent}
-                    className={styles.progress}
-                  ></progress>
-                </>
-              ) : (
-                <></>
-              )}
+          <div className={styles.progressContent}>
+            <div className={styles.v_line}>
+              {props.courseReview.grade.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  {distribute.item === 6 && distribute.percent > 0 ? (
+                    distribute.item === 6 || 1 ? (
+                      <>
+                        {/* <label
+                          htmlFor={gradeText(distribute.item)}
+                          className={styles.progressLabel}
+                        >
+                          {gradeText(distribute.item)}
+                        </label> */}
+                        <div className={styles.label}>{gradeText(distribute.item)}</div>
+                        <progress
+                          id={gradeText(distribute.item)}
+                          max="100"
+                          value={distribute.percent}
+                          className={styles.progress}
+                        ></progress>
+                        <span>{distribute.percent}%</span>
+                      </>
+                    ) : (
+                      <></>
+                    )
+                  ) : distribute.item !== 6 ? (
+                    <>
+                      {/* <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
+                        {gradeText(distribute.item)}
+                      </label> */}
+                      <div className={styles.label}>{gradeText(distribute.item)}</div>
+                      <progress
+                        id={gradeText(distribute.item)}
+                        max="100"
+                        value={distribute.percent}
+                        className={styles.progress}
+                      ></progress>
+                      <span>{distribute.percent}%</span>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className={styles.content}>

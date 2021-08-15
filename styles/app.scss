@@ -8,6 +8,11 @@
   padding-right: 15px;
 }
 
+* {
+  font-family: YuGothic;
+  -webkit-text-size-adjust: 100%;
+}
+
 @media (min-width: 768px) {
   .Container {
     width: 750px;
