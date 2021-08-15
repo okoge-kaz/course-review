@@ -235,7 +235,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
         <div className={styles.title}>詳細情報</div>
 
         <div className={styles.content}>
-          <div className={styles.subtitle}>授業のわかりやすさ</div>
+          <div className={styles.subtitle}>わかりやすさ</div>
           {props.courseReview.understandability.distributes.map(distribute => (
             <div key={distribute.item} className={styles.progressDiv}>
               <label
@@ -264,7 +264,7 @@ const LecturesListContent = (props: StaticIndexProps) => {
         </div>
 
         <div className={styles.content}>
-          <div className={styles.subtitle}>試験の難易度</div>
+          <div className={styles.subtitle}>試験全体の難易度</div>
           {props.courseReview.examDifficulty.distributes.map(distribute => (
             <div key={distribute.item} className={styles.progressDiv}>
               <label htmlFor={examDifficultyText(distribute.item)} className={styles.progressLabel}>
@@ -279,6 +279,13 @@ const LecturesListContent = (props: StaticIndexProps) => {
             </div>
           ))}
         </div>
+
+        {/* <div className={styles.content}>
+          <div className={styles.subtitle}>出席率</div>
+          {props.courseReview.attendanceRate.distributes.map(distribute => (
+            
+          ))}
+        </div> */}
 
         <div className={styles.content}>
           <div className={styles.subtitle}>点数</div>
