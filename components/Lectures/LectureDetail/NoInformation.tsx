@@ -4,6 +4,7 @@ import styles from './LectureDetailContent.module.scss'
 const NoInformation = () => {
   return (
     <>
+      <div className="Container">
       <div className={styles.Container}>
         <div className={styles.main}>
           <div className={styles.title}>情報なし</div>
@@ -12,6 +13,7 @@ const NoInformation = () => {
             <p>次回の逆評定集計時にこの科目に関する情報をお寄せいただけると幸いです。</p>
           </div>
         </div>
+      </div>
       </div>
     </>
   )
