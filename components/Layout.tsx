@@ -14,7 +14,7 @@ const Layout: FC<LayoutProps> = props => {
         <Header />
       </header>
       <main>{children}</main>
-      <footer className="footer mt-auto">
+      <footer className="mt-auto">
         <Footer />
       </footer>
     </div>
