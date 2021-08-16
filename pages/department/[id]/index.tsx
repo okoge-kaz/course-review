@@ -6,11 +6,10 @@ import { DepartmentCoursesListWithLevel } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
 import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
-import LectureSearchBar from '../../../components/Search/LectureSearchBar'
+import LectureSearchBar from '../../../components/Search/LectureSearchBarPlain'
 import LecureCell from '../../../components/Search/DepartmentLecureCell'
 import styles from '../../../styles/index.module.scss'
 import Warning from '../../../components/Search/Warning'
-import LectureFilter from '../../../components/Filter/LectureFilter'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
@@ -21,9 +20,7 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
   const title = 'Titech Info: 逆評定'
 
   const [searchText, setSearchText] = useState('')
-  const [applyedGenres, setApplyedGenres] = useState<string[]>([])
   const [isFilled, setIsFilled] = useState(false)
-  const [isOpenfilter, setIsOpenfilter] = useState(false)
 
   const keyInputEvent = (text: string) => {
     setSearchText(text)
@@ -59,16 +56,7 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
-          changeIsOpenFilter={isOpenFilter => setIsOpenfilter(isOpenFilter)}
         />
-        {isOpenfilter ? (
-          <LectureFilter
-            onApply={genres => setApplyedGenres(genres)}
-            onReset={() => setApplyedGenres([])}
-          />
-        ) : (
-          <></>
-        )}
         {isFilled ? (
           searchText.length !== 0 ? (
             <>
