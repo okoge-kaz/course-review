@@ -9,6 +9,7 @@ import LectureSearchBar from '../components/Search/LectureSearchBar'
 import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
 import Warning from '../components/Search/Warning'
+import LectureFilter from '../components/Filter/LectureFilter'
 
 interface StaticIndexProps {
   segments: Segment[]
@@ -18,6 +19,9 @@ interface StaticIndexProps {
 const index = (props: StaticIndexProps) => {
   const [searchText, setSearchText] = useState('')
   const [isFilled, setIsFilled] = useState(false)
+  const [isOpenfilter, setIsOpenfilter] = useState(false)
+  const [applyedGenres, setApplyedGenres] = useState<string[]>([])
+
 
   const keyInputEvent = (text: string) => {
     setSearchText(text)
@@ -50,7 +54,12 @@ const index = (props: StaticIndexProps) => {
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
+          changeIsOpenFilter={isOpenFilter => setIsOpenfilter(isOpenFilter)}
         />
+        {isOpenfilter ? <LectureFilter
+            onApply={genres => setApplyedGenres(genres)}
+            onReset={() => setApplyedGenres([])}
+          /> : <></>}
         {isFilled ? (
           searchText.length !== 0 ? (
             <div className={styles.Container}>

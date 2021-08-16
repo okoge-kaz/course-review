@@ -1,0 +1,68 @@
+.main {
+  font-family: YuGothic;
+  .card {
+    border: none;
+    border-radius: 10px;
+    margin: 16px;
+    padding: 16px;
+    background: #f0f2f5;
+  }
+
+  .title {
+    font-size: 1.5em;
+    color: #606266;
+    font-weight: bold;
+    margin-block-start: 0;
+  }
+
+  .genreContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    margin-bottom: 24px;
+  }
+
+  .genre {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    margin: 4px;
+    color: #606266;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    outline: none;
+  }
+
+  .reset {
+    padding: 16px;
+    background: #ed7272;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 20px;
+    color: white;
+    margin-right: 8px;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    outline: none;
+  }
+
+  .apply {
+    padding: 16px;
+    background: #009688;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    outline: none;
+  }
+
+  .active {
+    background: #009688;
+    color: white;
+  }
+}
