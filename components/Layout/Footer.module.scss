@@ -7,7 +7,10 @@
 
 .main .text {
   text-align: center;
-  font: normal normal bold 16px/27px YuGothic;
+  font-family: YuGothic;
+  font: normal normal bold;
+  font-weight: bold;
+  font-size: 16px/27px;
   letter-spacing: 0px;
   color: #303133;
   .link {

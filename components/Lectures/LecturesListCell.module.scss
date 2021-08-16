@@ -1,7 +1,8 @@
 .main {
   div {
     font-size: 25px;
-    font-family: normal normal medium YuGothic;
+    font-family: YuGothic;
+    font: normal normal medium;
     color: #3e3f68;
     background-color: #f0f2f5;
     padding-left: 29px;
@@ -14,7 +15,6 @@
       padding: 0px;
       margin-top: 18px;
       font-size: 20px;
-      font-family: YuGothic;
       color: #585858;
       white-space: nowrap;
       overflow: hidden;
