@@ -175,15 +175,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
             <span className={styles.subtitle}>教員</span>
             <span className={styles.teachersList}>{props.courseReview.teachers.join(', ')}</span>
           </p>
-          {/* <p>
-            {' '}
-            <span className={styles.subtitle}>講義コード </span>
-            <span className={styles.teachersList}>{props.courseReview.courseNumber}</span>
-          </p>
-          <p>
-            <span className={styles.subtitle}>開講年度 </span>
-            <span className={styles.teachersList}>{props.courseReview.year}年度</span>
-          </p> */}
           <p>
             <div className={styles.content}>
               <div className={styles.subtitle}>総合評価</div>
@@ -299,12 +290,45 @@ const LecturesListContent = (props: StaticIndexProps) => {
           </div>
         </div>
 
-        {/* <div className={styles.content}>
+        <div className={styles.content}>
           <div className={styles.subtitle}>出席率</div>
-          {props.courseReview.attendanceRate.distributes.map(distribute => (
-            
-          ))}
-        </div> */}
+          <div className={styles.progressContent}>
+            <div className={styles.v_line}>
+              {props.courseReview.attendanceRate.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  <div className={styles.label}>{attendanceRateText(distribute.item)}</div>
+                  <progress
+                    id={attendanceRateText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                  <span>{distribute.percent}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.subtitle}>必修科目、選択科目</div>
+          <div className={styles.progressContent}>
+            <div className={styles.v_line}>
+              {props.courseReview.compulsoryOrElective.distributes.map(distribute => (
+                <div key={distribute.item} className={styles.progressDiv}>
+                  <div className={styles.label}>{compulsoryOrElectiveText(distribute.item)}</div>
+                  <progress
+                    id={compulsoryOrElectiveText(distribute.item)}
+                    max="100"
+                    value={distribute.percent}
+                    className={styles.progress}
+                  ></progress>
+                  <span>{distribute.percent}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
         <div className={styles.content}>
           <div className={styles.subtitle}>点数</div>
@@ -374,12 +398,20 @@ const LecturesListContent = (props: StaticIndexProps) => {
 
         <div className={styles.content}>
           <div className={styles.subtitle}>レポート字数(日本語)</div>
-          <li>{props.courseReview.jaReportLetters}</li>
+          {props.courseReview.jaReportLetters.length === 0 ? (
+            <>情報なし</>
+          ) : (
+            <li>{props.courseReview.jaReportLetters}</li>
+          )}
         </div>
 
         <div className={styles.content}>
           <div className={styles.subtitle}>レポート字数(English)</div>
-          <li>{props.courseReview.enReportWords}</li>
+          {props.courseReview.enReportWords.length === 0 ? (
+            <>情報なし</>
+          ) : (
+            <li>{props.courseReview.enReportWords}</li>
+          )}
         </div>
       </div>
     </div>
