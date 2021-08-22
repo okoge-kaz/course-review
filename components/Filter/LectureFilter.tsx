@@ -14,23 +14,30 @@ type LectureFilterProps = {
 const filterGenreCategories: LectureGenreCategory[] = [
   {
     name: `講義番号`,
-    genres: [
-      `100番台`,
-      `200番台`,
-      `300番台`,
-    ],
+    genres: [`100番台`, `200番台`, `300番台`],
   },
   {
     name: '開講学院',
     genres: [
-      `教養科目`,
-      `初年次専門科目`,
-      `理学院`,
-      `工学院`,
-      `物質理工学院`,
-      `情報理工学院`,
-      `生命理工学院`,
-      `環境・社会理工学院`
+      `数学系`,
+      `物理学系`,
+      '化学系',
+      '地球惑星科学系',
+      '機械系',
+      'システム制御系',
+      '電気電子系',
+      '情報通信系',
+      '経営工学系',
+      '材料系',
+      '応用化学系',
+      '数理計算科学系',
+      '情報工学系',
+      '生命理工学系',
+      '建築系',
+      '土木・環境工学系',
+      '融合理工学系',
+      '文系教養科目',
+      '英語科目',
     ],
   },
 ]
@@ -39,7 +46,9 @@ const LectureFilter = (props: LectureFilterProps) => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 
   const tapGenres = (genre: string) => {
-    selectedGenres.includes(genre) ? setSelectedGenres(selectedGenres.filter(g => g!==genre)) : setSelectedGenres([...selectedGenres, genre])
+    selectedGenres.includes(genre)
+      ? setSelectedGenres(selectedGenres.filter(g => g !== genre))
+      : setSelectedGenres([...selectedGenres, genre])
   }
   return (
     <div className={styles.main}>
