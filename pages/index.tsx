@@ -11,10 +11,17 @@ import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
 import Warning from '../components/Search/Warning'
 import LectureFilter from '../components/Filter/LectureFilter'
+import DepartmentContent from '../components/Lectures/LecturesListContent'
+
+interface DepartmentCoursesLists {
+  id: number
+  departmentCoursesList: DepartmentCoursesListWithLevel[]
+}
 
 interface StaticIndexProps {
   segments: Segment[]
   courses: CourseDetail[]
+  genreCourses: DepartmentCoursesLists[]
 }
 
 const departmentNameToNumber = (departmentName: string) => {
@@ -75,85 +82,87 @@ const index = (props: StaticIndexProps) => {
 
   const title = '逆評定 - Titech Info : 東工大情報サイト'
 
-  const [courses, setCourses] = useState<Course[]>([])
-  // let courses: Course[] = new Array()
-
-  const featchDepartmentData = async (indexes: number[], levels: number[]) => {
-    for (const index in indexes) {
-      const url = `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/department/${index}.json`
-      const res2 = await fetch(url)
-      const unFilteredCourses: DepartmentCoursesListWithLevel[] = await res2.json()
-      unFilteredCourses.map(withLevelUnFilteredCourses => {
-        if (levels.includes(withLevelUnFilteredCourses.level)) {
-          withLevelUnFilteredCourses.courses.map(course => courses.push(course))
-        }
-      })
+  const filteredLectures = useMemo(() => {
+    if (searchText.length === 0) {
+      return []
     }
-    setCourses(courses)
-  }
+    const splitSearchText = searchText.replace('　', ' ').split(' ')
 
-  const filteredLectures =
-    (applyedGenres.length === 0 || applyedGenres.length === undefined)
-      ? useMemo(() => {
-          if (searchText.length === 0) {
-            return []
-          }
-          const splitSearchText = searchText.replace('　', ' ').split(' ')
+    return props.courses
+      .filter(course =>
+        splitSearchText.every(searchword =>
+          course.keywords.some(keyword =>
+            keyword.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+          ),
+        ),
+      )
+      .sort()
+  }, [props.courses, searchText])
 
-          return props.courses.filter(course =>
-            splitSearchText.every(searchword =>
-              course.keywords.some(keyword =>
-                keyword.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+  const filteredLecturesWithGenre = useMemo(() => {
+    let levels: number[] = new Array()
+    let departmentsNumbers: number[] = new Array()
+    applyedGenres.forEach(genre => {
+      if (genre.includes('番台')) {
+        if (genre === '100番台') {
+          levels.push(1)
+        } else if (genre === '200番台') {
+          levels.push(2)
+        } else if (genre === '300番台') {
+          levels.push(3)
+        } else {
+          // const no: never = genre
+        }
+      } else {
+        departmentsNumbers.push(departmentNameToNumber(genre))
+      }
+    })
+    if (levels.length === 0) {
+      levels = [1, 2, 3]
+    }
+    if (departmentsNumbers.length === 0) {
+      for (let i: number = 1; i <= 25; i++) {
+        departmentsNumbers.push(i)
+      }
+    }
+
+    const splitSearchText = searchText.replace('　', ' ').split(' ')
+
+    if (searchText.length === 0) {
+      return props.genreCourses
+        .filter(departmentWithLevel => departmentsNumbers.includes(departmentWithLevel.id))
+        .filter(departmentWithLevel =>
+          departmentWithLevel.departmentCoursesList.filter(departmentCourses =>
+            levels.every(level => level === departmentCourses.level),
+          ),
+        )
+        .sort()
+    } else {
+      return props.genreCourses
+        .filter(departmentWithLevel =>
+          departmentsNumbers.every(departmentNumber => departmentWithLevel.id === departmentNumber),
+        )
+        .filter(departmentWithLevel =>
+          departmentWithLevel.departmentCoursesList.filter(departmentCourses =>
+            levels.every(level => level === departmentCourses.level),
+          ),
+        )
+        .filter(departmentWithLevel =>
+          departmentWithLevel.departmentCoursesList.map(departmentCourses =>
+            departmentCourses.courses.filter(course =>
+              splitSearchText.every(
+                searchword =>
+                  course.courseName.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()) ||
+                  course.teachers.some(teacher =>
+                    teacher.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+                  ),
               ),
             ),
-          )
-        }, [props.courses, searchText])
-      : useMemo(() => {
-          let levels: number[] = new Array()
-          let departmentsNumbers: number[] = new Array()
-          applyedGenres.forEach(genre => {
-            if (genre.includes('番台')) {
-              if (genre === '100番台') {
-                levels.push(1)
-              } else if (genre === '200番台') {
-                levels.push(2)
-              } else if (genre === '300番台') {
-                levels.push(3)
-              } else {
-                // const no: never = genre
-              }
-            } else {
-              departmentsNumbers.push(departmentNameToNumber(genre))
-            }
-          })
-          if(levels.length===0){
-            levels = [1,2,3]
-          }
-          if (departmentsNumbers.length === 0) {
-            let ids: number[] = new Array()
-            for (let i: number = 1; i <= 25; i++) {
-              ids.push(i)
-            }
-            featchDepartmentData(ids,levels)
-          } else {
-            featchDepartmentData(departmentsNumbers, levels)
-          }
-
-          if (searchText.length === 0) {
-            return courses
-          }
-          const splitSearchText = searchText.replace('　', ' ').split(' ')
-
-          return courses.filter(course =>
-            splitSearchText.every(
-              searchword =>
-                course.courseName.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()) ||
-                course.teachers.some(teacher =>
-                  teacher.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
-                ),
-            ),
-          )
-        }, [courses, searchText])
+          ),
+        )
+        .sort()
+    }
+  }, [props.genreCourses, searchText])
 
   return (
     <div>
@@ -175,23 +184,37 @@ const index = (props: StaticIndexProps) => {
         ) : (
           <></>
         )}
-        {isFilled ? (
-          searchText.length !== 0 ? (
-            <div className={styles.Container}>
-              {filteredLectures.map(lecture => (
-                <LecureCell
-                  key={lecture.id}
-                  id={lecture.id}
-                  name={lecture.courseName}
-                  teachers={lecture.teachers}
-                />
-              ))}
-            </div>
+        {applyedGenres.length === 0 || applyedGenres.length === undefined ? (
+          isFilled ? (
+            searchText.length !== 0 ? (
+              <div className={styles.Container}>
+                {filteredLectures.map(lecture => (
+                  <LecureCell
+                    key={lecture.id}
+                    id={lecture.id}
+                    name={lecture.courseName}
+                    teachers={lecture.teachers}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Warning></Warning>
+            )
           ) : (
-            <Warning></Warning>
+            <Content {...props} />
           )
         ) : (
-          <Content {...props} />
+          <>
+            {filteredLecturesWithGenre.map(departmentCourses =>
+              departmentCourses.departmentCoursesList.map(individualDeparment => (
+                <DepartmentContent
+                  key={individualDeparment.level}
+                  level={individualDeparment.level}
+                  courses={individualDeparment.courses}
+                />
+              )),
+            )}
+          </>
         )}
       </div>
     </div>
@@ -209,10 +232,25 @@ export const getStaticProps: GetStaticProps = async () => {
     `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
   )
   const courses: CourseDetail[] = await response.json()
+
+  let genreCourses: DepartmentCoursesLists[] = new Array()
+
+  for (let id = 1; id <= 25; id++) {
+    const res2 = await fetch(
+      `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/department/${id}.json`,
+    )
+    const departmentCoursesListWithLevel: DepartmentCoursesListWithLevel[] = await res2.json()
+    const individualData: DepartmentCoursesLists = {
+      id: id,
+      departmentCoursesList: departmentCoursesListWithLevel,
+    }
+    genreCourses.push(individualData)
+  }
   return {
     props: {
       segments,
       courses,
+      genreCourses,
     },
   }
 }
