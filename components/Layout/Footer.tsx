@@ -2,8 +2,7 @@ import React, { FC } from 'react'
 import styles from './Footer.module.scss'
 import Link from 'next/link'
 
-const link =
-  'https://twitter.com/tech_techfrom18'
+const link = 'https://twitter.com/tech_techfrom18'
 
 const Footer: FC = () => (
   <div className={styles.Container}>
