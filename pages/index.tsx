@@ -18,6 +18,7 @@ interface CourseDetailList {
   url: string
   courseName: string
   teachers: string[]
+  id: string
 }
 
 interface StaticIndexProps {
@@ -74,7 +75,7 @@ const index = (props: StaticIndexProps) => {
         return genreNumber.includes(value)
       }
     }
-    
+
     if (searchText.length === 0) {
       if (genresNumber.length === 0) {
         return props.genreCourses
@@ -117,9 +118,7 @@ const index = (props: StaticIndexProps) => {
       .filter(courseDetail =>
         filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
       )
-      .filter(courseDetail =>
-        filtercheck(courseDetail.department, genresDepartments, genresNumber),
-      )
+      .filter(courseDetail => filtercheck(courseDetail.department, genresDepartments, genresNumber))
       .sort()
   }, [props.genreCourses, searchText, applyedGenres])
 
@@ -166,34 +165,10 @@ const index = (props: StaticIndexProps) => {
           <>
             {
               <div className={styles.Container}>
-                <div>props length: {props.genreCourses.length}</div>
-                <div>length: {filteredLecturesWithGenre.length}</div>
-                <div>
-                  {applyedGenres
-                    .filter(genre => genre.includes('番台'))
-                    .map(genre => Number(genre[0]))
-                    .map(genre => (
-                      <>
-                        <div>
-                          {genre}: {typeof genre}
-                        </div>
-                      </>
-                    ))}
-                </div>
-                <div>
-                  {applyedGenres
-                    .filter(genre => !genre.includes('番台'))
-                    .map(genre => (
-                      <div>
-                        {genre}: {typeof genre}
-                      </div>
-                    ))}
-                </div>
-
                 {filteredLecturesWithGenre.map(lecture => (
                   <LecureCell
-                    key={lecture.courseId}
-                    id={lecture.courseId}
+                    key={lecture.id}
+                    id={lecture.id}
                     name={lecture.courseName}
                     teachers={lecture.teachers}
                   />
@@ -220,7 +195,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const courses: CourseDetail[] = await response.json()
 
   const res2 = await fetch(
-    'https://raw.githubusercontent.com/okoge-kaz/gyaku-hyoutei2020-json/master/course.json',
+    'https://raw.githubusercontent.com/okoge-kaz/TokyoTech-OCW-scraping/main/scraping/course.json',
   )
   const genreCourses: CourseDetailList[] = await res2.json()
 
