@@ -59,16 +59,47 @@ const index = (props: StaticIndexProps) => {
     const genresNumber: number[] = applyedGenres
       .filter(genre => genre.includes('番台'))
       .map(genre => Number(genre[0]))
-    const genresDepartment: string[] = applyedGenres.filter(genre => !genre.includes('番台'))
+    const genresDepartments: string[] = applyedGenres.filter(genre => !genre.includes('番台'))
 
+    const filtercheck = (
+      value: string | number,
+      genreDepartment: string[],
+      genreNumber: number[],
+    ) => {
+      if (typeof value == 'string') {
+        if (genreDepartment.length === 0) return true
+        return genreDepartment.includes(value)
+      } else {
+        if (genreNumber.length === 0) return true
+        return genreNumber.includes(value)
+      }
+    }
+    
     if (searchText.length === 0) {
+      if (genresNumber.length === 0) {
+        return props.genreCourses
+          .filter(courseDetail =>
+            filtercheck(courseDetail.department, genresDepartments, genresNumber),
+          )
+          .sort()
+      }
+
+      if (genresDepartments.length === 0) {
+        return props.genreCourses
+          .filter(courseDetail =>
+            filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
+          )
+          .sort()
+      }
+
       return props.genreCourses
-        .filter(courseDetail => {
-          genresNumber.some(genreNumber => courseDetail.courseDigit === genreNumber)
-        })
-        .filter(courseDetail => {
-          genresDepartment.some(genreDepartment => courseDetail.department === genreDepartment)
-        })
+        .filter(courseDetail =>
+          filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
+        )
+        .filter(courseDetail =>
+          filtercheck(courseDetail.department, genresDepartments, genresNumber),
+        )
+        .sort()
     }
 
     const splitSearchText = searchText.replace('　', ' ').split(' ')
@@ -83,12 +114,13 @@ const index = (props: StaticIndexProps) => {
             ),
         ),
       )
-      .filter(courseDetail => {
-        genresNumber.some(genreNumber => courseDetail.courseDigit === genreNumber)
-      })
-      .filter(courseDetail => {
-        genresDepartment.some(genreDepartment => courseDetail.department === genreDepartment)
-      })
+      .filter(courseDetail =>
+        filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
+      )
+      .filter(courseDetail =>
+        filtercheck(courseDetail.department, genresDepartments, genresNumber),
+      )
+      .sort()
   }, [props.genreCourses, searchText, applyedGenres])
 
   return (
@@ -134,17 +166,27 @@ const index = (props: StaticIndexProps) => {
           <>
             {
               <div className={styles.Container}>
-                <div>test </div>
-                {/* <div>{props.genreCourses[0].department}</div>
-                <div>{ (props.genreCourses[0].department === (applyedGenres.filter(genre => !genre.includes('番台')))[0]).toString() }</div>
-                <div>{applyedGenres.map(genre => <div>{genre}</div>)}</div> */}
-                <div>{filteredLecturesWithGenre.length}</div>
+                <div>props length: {props.genreCourses.length}</div>
+                <div>length: {filteredLecturesWithGenre.length}</div>
                 <div>
                   {applyedGenres
                     .filter(genre => genre.includes('番台'))
                     .map(genre => Number(genre[0]))
                     .map(genre => (
-                      <div>{genre}</div>
+                      <>
+                        <div>
+                          {genre}: {typeof genre}
+                        </div>
+                      </>
+                    ))}
+                </div>
+                <div>
+                  {applyedGenres
+                    .filter(genre => !genre.includes('番台'))
+                    .map(genre => (
+                      <div>
+                        {genre}: {typeof genre}
+                      </div>
                     ))}
                 </div>
 
