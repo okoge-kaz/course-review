@@ -3,7 +3,7 @@ import styles from './Footer.module.scss'
 import Link from 'next/link'
 
 const link =
-  'https://docs.google.com/forms/d/e/1FAIpQLSfIW7Dz5UWB4wb75k5zgJk46Y_2bmVm2EUUYTZBOOPBHhleXA/viewform'
+  'https://twitter.com/tech_techfrom18'
 
 const Footer: FC = () => (
   <div className={styles.Container}>
