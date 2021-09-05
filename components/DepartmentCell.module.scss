@@ -1,9 +1,8 @@
+@import '../styles/variables';
 .main {
   div {
     font-size: 25px;
-    // font-family: YuGothic;
-    font: normal normal medium;
-    color: #3E3F68;
+    color: $test-color;
     background-color: #f0f2f5;
     padding-left: 29px;
     margin-top: 20px;
@@ -13,6 +12,6 @@
   }
   .link {
     text-decoration: none;
-    color: #3E3F68;
+    color: $test-color;
   }
 }

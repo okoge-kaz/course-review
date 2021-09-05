@@ -1,6 +1,7 @@
+@import '../../styles/_variables.scss';
 .main {
   background-color: white;
-  color: #78ea4e;
+  color: $sub-color;
   margin-left: 9px;
   margin-bottom: 10px;
   text-align: left;
@@ -11,7 +12,7 @@
 
   .link {
     text-decoration: none;
-    color: #78ea4e;
+    color: $sub-color;
     font-family: Lobster;
   }
 }

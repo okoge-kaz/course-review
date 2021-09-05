@@ -1,13 +1,13 @@
+@import '../../styles/variables';
 .Container {
-  background-color: #f1ac9d;
+  background-color: $main-color;
   margin-right: auto;
   margin-left: auto;
   
   h1 {
     font-size: 30px;
     color: #ffffff;
-    // font-family: YuGothic;
-    font: normal normal bold;
+    font-weight: bold;
     margin-bottom: 0px;
     margin-top: 0px;
   }

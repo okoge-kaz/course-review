@@ -1,3 +1,4 @@
+@import '../../styles/variables';
 .Container {
   margin-right: auto;
   margin-left: auto;
@@ -5,13 +6,13 @@
   padding-bottom: 19px;
 
   .main {
-    color: #585858;
+    color: $sub-text-color;
     font-size: 25px;
     padding-left: 7px;
     div {
       font-size: 25px;
       margin-top: 4px;
-      border-bottom: 2px solid #f1ac9d;
+      border-bottom: 2px solid $main-color;
       left: 22px;
       padding-left: 10px;
       margin-bottom: 9px;

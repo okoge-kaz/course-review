@@ -1,9 +1,8 @@
+@import '../../styles/variables';
 .main {
   div {
     font-size: 25px;
-    // font-family: YuGothic;
-    font: normal normal medium;
-    color: #3e3f68;
+    color: $test-color;
     background-color: #f0f2f5;
     padding-left: 29px;
     padding-right: 15px;
@@ -15,7 +14,7 @@
       padding: 0px;
       margin-top: 18px;
       font-size: 20px;
-      color: #585858;
+      color: $sub-text-color;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -23,6 +22,6 @@
   }
   .link {
     text-decoration: none;
-    color: #3e3f68;
+    color: $test-color;
   }
 }

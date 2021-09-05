@@ -1,6 +1,6 @@
+@import '../../styles/variables';
 .main {
   display: flex;
-  // margin: 16px;
   margin-top: 16px;
   margin-bottom: 16px;
   justify-content: space-between;
@@ -31,7 +31,6 @@
   display: flex;
   background: #f0f2f5;
   flex: 1;
-  // margin-left: 8px;
   align-items: center;
 }
 

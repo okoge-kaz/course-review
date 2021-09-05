@@ -1,3 +1,4 @@
+@import '../../styles/_variables.scss';
 .main {
   background: rgb(240, 242, 245, 0.3);
   padding-top: 34px;
@@ -7,15 +8,13 @@
 
 .main .text {
   text-align: center;
-  font-family: YuGothic;
-  font: normal normal bold;
   font-weight: bold;
-  font-size: 16px/27px;
+  font-size: 16px;
   letter-spacing: 0px;
-  color: #303133;
+  color: $footer-text-color;
   .link {
     text-decoration: none;
-    color: #3E3F68;
+    color: $footer-text-color;
   }
 }
 
