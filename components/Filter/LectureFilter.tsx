@@ -118,11 +118,11 @@ const LectureFilter = (props: LectureFilterProps) => {
                   {filterGenreCategory.department}
                 </button>
                 {selectedDepartment.includes(filterGenreCategory.department) ? (
-                  <span className={styles.right_side}>
-                    <span
-                      className={styles.dli_close}
-                      onClick={() => tapDepartment(filterGenreCategory.department)}
-                    ></span>
+                  <span
+                    className={styles.right_side}
+                    onClick={() => tapDepartment(filterGenreCategory.department)}
+                  >
+                    <span className={styles.dli_close}></span>
                   </span>
                 ) : (
                   <></>
