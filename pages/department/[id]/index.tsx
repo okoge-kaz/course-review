@@ -6,7 +6,6 @@ import { DepartmentCoursesListWithLevel } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
 import Head from 'next/head'
 import LectureSearchBar from '../../../components/Search/LectureSearchBarPlain'
-import Warning from '../../../components/Search/Warning'
 
 interface StaticIndexProps {
   courseslists: DepartmentCoursesListWithLevel[]
