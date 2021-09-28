@@ -45,14 +45,16 @@ const index = (props: StaticIndexProps) => {
     }
     const splitSearchText = searchText.replace('　', ' ').split(' ')
 
-    return props.courses
+    return props.genreCourses
       .filter(course =>
         splitSearchText.every(searchword =>
-          course.keywords.some(keyword =>
-            keyword.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
-          ),
+          course.courseName.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()) ||
+            course.teachers.some(teacher =>
+              teacher.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
+            ),
         ),
       )
+      .filter(course => course.isExist === true )
       .sort()
   }, [props.courses, searchText])
 
