@@ -13,6 +13,10 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
       return
     }
 
+    const url = new URL(window.location.toString())
+    url.searchParams.set('searchText', e.currentTarget.value)
+    window.history.pushState({}, '', url.toString())
+
     props.keyInputEvent(e.currentTarget.value)
   }
 
