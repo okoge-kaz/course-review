@@ -18,6 +18,7 @@ interface CourseDetailList {
   courseName: string
   teachers: string[]
   id: string
+  isExist: boolean
 }
 
 interface StaticIndexProps {
@@ -99,6 +100,7 @@ const index = (props: StaticIndexProps) => {
         .filter(courseDetail =>
           filtercheck(courseDetail.department, genresDepartments, genresNumber),
         )
+        .filter(courseDetail => courseDetail.isExist === true)
         .sort()
     }
 
@@ -118,6 +120,7 @@ const index = (props: StaticIndexProps) => {
         filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
       )
       .filter(courseDetail => filtercheck(courseDetail.department, genresDepartments, genresNumber))
+      .filter(courseDetail => courseDetail.isExist === true)
       .sort()
   }, [props.genreCourses, searchText, applyedGenres])
 
@@ -190,7 +193,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const courses: CourseDetail[] = await response.json()
 
   const res2 = await fetch(
-    'https://raw.githubusercontent.com/okoge-kaz/TokyoTech-OCW-scraping/main/scraping/course.json',
+    'https://raw.githubusercontent.com/okoge-kaz/TokyoTech-OCW-scraping/main/course_data.json',
   )
   const genreCourses: CourseDetailList[] = await res2.json()
 
