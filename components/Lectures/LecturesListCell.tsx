@@ -1,5 +1,5 @@
 import styles from './LecturesListCell.module.scss'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 
 interface StaticIndexProps {
@@ -12,14 +12,12 @@ interface StaticIndexProps {
 
 const LecturesListContentCell = (props: StaticIndexProps) => {
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${props.evaluation === 0 ? styles.nonExist : styles.exist}`}>
       <Link href={`../../course/${props.id}`}>
         <a className={styles.link}>
           <div>
             {props.name}
-            <div className={styles.teachers}>
-              {props.teachers.join(', ')}
-            </div>
+            <div className={styles.teachers}>{props.teachers.join(', ')}</div>
           </div>
         </a>
       </Link>

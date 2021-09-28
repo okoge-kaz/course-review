@@ -1,12 +1,12 @@
 @import '../../styles/variables';
 .main {
+  margin-top: 20px;
   div {
     font-size: 25px;
     color: $test-color;
     background-color: #f0f2f5;
     padding-left: 29px;
     padding-right: 15px;
-    margin-top: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 5px;
@@ -24,4 +24,9 @@
     text-decoration: none;
     color: $test-color;
   }
+}
+
+.exist {
+  border: solid 2px #8bbdff;
+  border-radius: 7px;
 }
