@@ -4,11 +4,8 @@ import Content from '../../../components/Lectures/LecturesListContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
 import { DepartmentCoursesListWithLevel } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
-import { CourseDetail } from '../../../interfaces/course'
 import Head from 'next/head'
 import LectureSearchBar from '../../../components/Search/LectureSearchBarPlain'
-import LecureCell from '../../../components/Search/DepartmentLecureCell'
-import styles from '../../../styles/index.module.scss'
 import Warning from '../../../components/Search/Warning'
 
 interface StaticIndexProps {
