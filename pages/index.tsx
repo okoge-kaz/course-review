@@ -144,20 +144,16 @@ const index = (props: StaticIndexProps) => {
         )}
         {applyedGenres.length === 0 ? (
           isFilled ? (
-            searchText.length !== 0 ? (
-              <div className={styles.Container}>
-                {filteredLectures.map(lecture => (
-                  <LecureCell
-                    key={lecture.id}
-                    id={lecture.id}
-                    name={lecture.courseName}
-                    teachers={lecture.teachers}
-                  />
-                ))}
-              </div>
-            ) : (
-              <Warning></Warning>
-            )
+            <div className={styles.Container}>
+              {filteredLectures.map(lecture => (
+                <LecureCell
+                  key={lecture.id}
+                  id={lecture.id}
+                  name={lecture.courseName}
+                  teachers={lecture.teachers}
+                />
+              ))}
+            </div>
           ) : (
             <Content {...props} />
           )

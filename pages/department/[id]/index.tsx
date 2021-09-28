@@ -55,19 +55,15 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
           changeIsFilled={isFilled => setIsFilled(isFilled)}
         />
         {isFilled ? (
-          searchText.length !== 0 ? (
-            <>
-              {filteredLectures.map(withLevellectures => (
-                <Content
-                  key={withLevellectures.level}
-                  level={withLevellectures.level}
-                  courses={withLevellectures.courses}
-                />
-              ))}
-            </>
-          ) : (
-            <Warning></Warning>
-          )
+          <>
+            {filteredLectures.map(withLevellectures => (
+              <Content
+                key={withLevellectures.level}
+                level={withLevellectures.level}
+                courses={withLevellectures.courses}
+              />
+            ))}
+          </>
         ) : (
           <>
             {(props.courseslists || []).map(courselist => (
