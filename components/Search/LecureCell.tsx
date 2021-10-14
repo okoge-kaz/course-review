@@ -7,11 +7,12 @@ interface StaticIndexProps {
   id: string
   name: string
   teachers: string[]
+  isExist: boolean
 }
 
 const LectureCell = (props: StaticIndexProps) => {
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${props.isExist ? styles.exist : styles.nonExist }`}>
       <Link href={`course/${props.id}`}>
         <a className={styles.link}>
           <div>
