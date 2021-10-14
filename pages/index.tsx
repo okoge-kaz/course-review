@@ -54,7 +54,6 @@ const index = (props: StaticIndexProps) => {
             ),
         ),
       )
-      .filter(course => course.isExist === true )
       .sort()
   }, [props.courses, searchText])
 
@@ -102,7 +101,6 @@ const index = (props: StaticIndexProps) => {
         .filter(courseDetail =>
           filtercheck(courseDetail.department, genresDepartments, genresNumber),
         )
-        .filter(courseDetail => courseDetail.isExist === true)
         .sort()
     }
 
@@ -122,7 +120,6 @@ const index = (props: StaticIndexProps) => {
         filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
       )
       .filter(courseDetail => filtercheck(courseDetail.department, genresDepartments, genresNumber))
-      .filter(courseDetail => courseDetail.isExist === true)
       .sort()
   }, [props.genreCourses, searchText, applyedGenres])
 
@@ -155,6 +152,7 @@ const index = (props: StaticIndexProps) => {
                   id={lecture.id}
                   name={lecture.courseName}
                   teachers={lecture.teachers}
+                  isExist={lecture.isExist}
                 />
               ))}
             </div>
@@ -171,6 +169,7 @@ const index = (props: StaticIndexProps) => {
                     id={lecture.id}
                     name={lecture.courseName}
                     teachers={lecture.teachers}
+                    isExist={lecture.isExist}
                   />
                 ))}
               </div>
