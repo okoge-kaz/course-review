@@ -4,7 +4,6 @@ import Head from 'next/head'
 import SubHead from '../components/SubHeader'
 import Content from '../components/Content'
 import { Segment } from '../interfaces/segment'
-import { CourseDetail } from '../interfaces/course'
 import LectureSearchBar from '../components/Search/LectureSearchBar'
 import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
@@ -23,7 +22,6 @@ interface CourseDetailList {
 
 interface StaticIndexProps {
   segments: Segment[]
-  courses: CourseDetail[]
   genreCourses: CourseDetailList[]
 }
 
@@ -64,7 +62,7 @@ const index = (props: StaticIndexProps) => {
         ),
       )
       .sort(compareCourses)
-  }, [props.courses, searchText])
+  }, [props.genreCourses, searchText])
 
   const filteredLecturesWithGenre = useMemo(() => {
     const genresNumber: number[] = applyedGenres
@@ -197,10 +195,6 @@ export const getStaticProps: GetStaticProps = async () => {
     'https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/school_departments.json',
   )
   const segments: Segment[] = await res.json()
-  const response = await fetch(
-    `https://titechinfo-data.s3-ap-northeast-1.amazonaws.com/course-review-tmp/search_keywords.json`,
-  )
-  const courses: CourseDetail[] = await response.json()
 
   const res2 = await fetch(
     'https://raw.githubusercontent.com/okoge-kaz/TokyoTech-OCW-scraping/main/course_data.json',
@@ -210,7 +204,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       segments,
-      courses,
       genreCourses,
     },
   }
