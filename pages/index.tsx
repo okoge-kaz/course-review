@@ -37,6 +37,14 @@ const index = (props: StaticIndexProps) => {
     setSearchText(text)
   }
 
+  const compareCourses = (a: CourseDetailList, b: CourseDetailList) => {
+    if (a.courseName < b.courseName) {
+      return -1
+    } else if (a.courseName > b.courseName) {
+      return 1
+    } else return 0
+  }
+
   const title = '逆評定 - Titech Info : 東工大情報サイト'
 
   const filteredLectures = useMemo(() => {
@@ -47,14 +55,15 @@ const index = (props: StaticIndexProps) => {
 
     return props.genreCourses
       .filter(course =>
-        splitSearchText.every(searchword =>
-          course.courseName.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()) ||
+        splitSearchText.every(
+          searchword =>
+            course.courseName.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()) ||
             course.teachers.some(teacher =>
               teacher.toLocaleLowerCase().includes(searchword.toLocaleLowerCase()),
             ),
         ),
       )
-      .sort()
+      .sort(compareCourses)
   }, [props.courses, searchText])
 
   const filteredLecturesWithGenre = useMemo(() => {
@@ -83,7 +92,7 @@ const index = (props: StaticIndexProps) => {
           .filter(courseDetail =>
             filtercheck(courseDetail.department, genresDepartments, genresNumber),
           )
-          .sort()
+          .sort(compareCourses)
       }
 
       if (genresDepartments.length === 0) {
@@ -91,7 +100,7 @@ const index = (props: StaticIndexProps) => {
           .filter(courseDetail =>
             filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
           )
-          .sort()
+          .sort(compareCourses)
       }
 
       return props.genreCourses
@@ -101,7 +110,7 @@ const index = (props: StaticIndexProps) => {
         .filter(courseDetail =>
           filtercheck(courseDetail.department, genresDepartments, genresNumber),
         )
-        .sort()
+        .sort(compareCourses)
     }
 
     const splitSearchText = searchText.replace('　', ' ').split(' ')
@@ -120,7 +129,7 @@ const index = (props: StaticIndexProps) => {
         filtercheck(courseDetail.courseDigit, genresDepartments, genresNumber),
       )
       .filter(courseDetail => filtercheck(courseDetail.department, genresDepartments, genresNumber))
-      .sort()
+      .sort(compareCourses)
   }, [props.genreCourses, searchText, applyedGenres])
 
   return (
