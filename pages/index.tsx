@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import SubHead from '../components/SubHeader'
 import Content from '../components/Content'
@@ -26,7 +27,7 @@ interface StaticIndexProps {
 }
 
 const index = (props: StaticIndexProps) => {
-  const [searchText, setSearchText] = useState('')
+  let [searchText, setSearchText] = useState('')
   const [isFilled, setIsFilled] = useState(false)
   const [isOpenfilter, setIsOpenfilter] = useState(false)
   const [applyedGenres, setApplyedGenres] = useState<string[]>([])
@@ -43,7 +44,25 @@ const index = (props: StaticIndexProps) => {
     } else return 0
   }
 
+  const router = useRouter()
+  const searchWords = router.query.searchText
+  console.log(searchWords)
+  searchWords === undefined
+    ? ''
+    : typeof searchWords === 'string'
+    ? searchText.length === 0
+      ? (searchText = searchWords)
+      : ''
+    : searchWords.map(searchWord =>
+      searchText.length === 0
+      ? (searchText += ' ' + searchWord)
+      : '',
+      )
+
   const title = '逆評定 - Titech Info : 東工大情報サイト'
+
+  console.log('searchtext')
+  console.log(searchText)
 
   const filteredLectures = useMemo(() => {
     if (searchText.length === 0) {
@@ -151,7 +170,7 @@ const index = (props: StaticIndexProps) => {
           <></>
         )}
         {applyedGenres.length === 0 ? (
-          isFilled ? (
+          searchText.length > 0 ? (
             <div className={styles.Container}>
               {filteredLectures.map(lecture => (
                 <LecureCell
