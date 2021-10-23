@@ -10,14 +10,10 @@ interface StaticIndexProps {
 }
 
 const LecturesListContent = (props: StaticIndexProps) => {
-  let sortedCourses: Course[] = props.courses.sort((str1,str2) => {
-    if( (str1.courseName).toLowerCase() > (str2.courseName).toLowerCase() ) {
-      return 1;
-    }
-    if( (str1.courseName).toLowerCase() < (str2.courseName).toLowerCase() ) {
-      return -1;
-    }
-    return 0;
+  let sortedCourses: Course[] = props.courses.sort((str1, str2) => {
+    if (str1.id > str2.id) return 1
+    if (str1.id < str2.id) return -1
+    return 0
   })
   return (
     <div className={style.Container}>
