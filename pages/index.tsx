@@ -37,9 +37,9 @@ const index = (props: StaticIndexProps) => {
   }
 
   const compareCourses = (a: CourseDetailList, b: CourseDetailList) => {
-    if (a.courseName < b.courseName) {
+    if (a.courseId < b.courseId) {
       return -1
-    } else if (a.courseName > b.courseName) {
+    } else if (a.courseId > b.courseId) {
       return 1
     } else return 0
   }
@@ -54,15 +54,10 @@ const index = (props: StaticIndexProps) => {
       ? (searchText = searchWords)
       : ''
     : searchWords.map(searchWord =>
-      searchText.length === 0
-      ? (searchText += ' ' + searchWord)
-      : '',
+        searchText.length === 0 ? (searchText += searchWord + '') : '',
       )
 
   const title = '逆評定 - Titech Info : 東工大情報サイト'
-
-  console.log('searchtext')
-  console.log(searchText)
 
   const filteredLectures = useMemo(() => {
     if (searchText.length === 0) {
