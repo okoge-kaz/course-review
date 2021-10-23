@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import SubHeader from '../../../components/Lectures/SubHeader'
 import Content from '../../../components/Lectures/LecturesListContent'
 import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
-import { DepartmentCoursesListWithLevel } from '../../../interfaces/courselist'
+import { DepartmentCoursesListWithLevel, Course } from '../../../interfaces/courselist'
 import { Segment, Department } from '../../../interfaces/segment'
 import Head from 'next/head'
 import LectureSearchBar from '../../../components/Search/LectureSearchBarPlain'
@@ -22,6 +22,14 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
     setSearchText(text)
   }
 
+  const compareCourses = (a: Course, b: Course) => {
+    if (a.id < b.id) {
+      return -1
+    } else if (a.id > b.id) {
+      return 1
+    } else return 0
+  }
+
   const filteredLectures = useMemo(() => {
     if (searchText.length === 0) {
       return []
@@ -30,15 +38,17 @@ const DepartmentCoursesList = (props: StaticIndexProps) => {
 
     return props.courseslists.map(withLevelCourses => ({
       level: withLevelCourses.level,
-      courses: withLevelCourses.courses.filter(course =>
-        splitSearchText.every(
-          text =>
-            course.courseName.toLocaleLowerCase().includes(text.toLocaleLowerCase()) ||
-            course.teachers.some(teacher =>
-              teacher.toLocaleLowerCase().includes(text.toLocaleLowerCase()),
-            ),
-        ),
-      ),
+      courses: withLevelCourses.courses
+        .filter(course =>
+          splitSearchText.every(
+            text =>
+              course.courseName.toLocaleLowerCase().includes(text.toLocaleLowerCase()) ||
+              course.teachers.some(teacher =>
+                teacher.toLocaleLowerCase().includes(text.toLocaleLowerCase()),
+              ),
+          ),
+        )
+        .sort(compareCourses),
     }))
   }, [props.courseslists, searchText])
 
