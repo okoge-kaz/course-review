@@ -1,3 +1,4 @@
+import router from 'next/router'
 import { KeyboardEvent, useState } from 'react'
 import styles from './LectureSearchBar.module.scss'
 
@@ -5,6 +6,8 @@ type LectureSeachBarProps = {
   keyInputEvent: (text: string) => void
   changeIsFilled: (isFilled: boolean) => void
   changeIsOpenFilter: (isOpen: boolean) => void
+  searchText: string
+  applyedGenres: string[]
 }
 
 const LectureSearchBar = (props: LectureSeachBarProps) => {
@@ -13,9 +16,9 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
       return
     }
 
-    const url = new URL(window.location.toString())
-    url.searchParams.set('searchText', e.currentTarget.value)
-    window.history.pushState({}, '', url.toString())
+    // const url = new URL(window.location.toString())
+    // url.searchParams.set('searchText', e.currentTarget.value)
+    // window.history.pushState({}, '', url.toString())
 
     props.keyInputEvent(e.currentTarget.value)
   }
@@ -85,6 +88,16 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
           onChange={e => setIsFilled(e)}
           placeholder="Search"
         />
+        <button
+          className={styles.searchClick}
+          onClick={e => {
+            e.preventDefault()
+            const PATH = `?searchText=` + props.searchText + 'searchGenre=' + props.applyedGenres.join(',')
+            router.push(PATH)
+          }}
+        >
+          検索
+        </button>
       </div>
     </div>
   )

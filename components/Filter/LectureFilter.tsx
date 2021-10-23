@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DepartmentCell from '../DepartmentCell'
+import router from 'next/router'
 import styles from './LectureFilter.module.scss'
 
 type LectureDepartmentCategory = {
@@ -10,6 +11,8 @@ type LectureDepartmentCategory = {
 type LectureFilterProps = {
   onApply: (selectedGenres: string[]) => void
   onReset: () => void
+  searchText: string
+  applyedGenres: string[]
 }
 
 const filterGenreCategories: LectureDepartmentCategory[] = [
@@ -62,6 +65,7 @@ const LectureFilter = (props: LectureFilterProps) => {
   const lectureNumber: string[] = [`100番台`, `200番台`, `300番台`]
 
   const [selectedDepartment, setSelectedDepartment] = useState<string[]>([])
+  const [isSearchClick, setIsSearchClick] = useState(false)
 
   const tapDepartment = (deaprtment: string) => {
     selectedDepartment.includes(deaprtment)
@@ -160,8 +164,11 @@ const LectureFilter = (props: LectureFilterProps) => {
         </button>
         <button
           className={styles.apply}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault()
             props.onApply(selectedGenres)
+            const PATH = `?searchText=` + props.searchText + 'searchGenre=' + props.applyedGenres.join(',')
+            router.push(PATH)
           }}
         >
           検索
