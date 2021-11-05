@@ -51,13 +51,6 @@ const index = (props: StaticIndexProps) => {
   const searchWords = currentPath.slice(searchWordIndex, searchGenreIndex - 12)
   const searchGenres = currentPath.slice(searchGenreIndex)
 
-  // console.log('searchword')
-  // console.log(searchWords)
-  // console.log(searchWordIndex)
-  // console.log(searchGenreIndex)
-  // console.log(currentPath.slice(searchWordIndex, (searchGenreIndex-12)))
-  // console.log(searchGenres)
-
   const splitSearchGenres = searchGenres.split(',')
 
   const title = '逆評定 - Titech Info : 東工大情報サイト'
@@ -171,7 +164,6 @@ const index = (props: StaticIndexProps) => {
         ) : (
           <></>
         )}
-        {/* {console.log(splitSearchGenres.length)} */}
         {splitSearchGenres.length <= 1 ? (
           searchWords.length > 0 ? (
             <div className={styles.Container}>
