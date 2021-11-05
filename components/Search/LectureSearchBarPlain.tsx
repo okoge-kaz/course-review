@@ -20,7 +20,6 @@ const LectureSearchBarPlain = (props: LectureSeachBarProps) => {
   }
 
   const [composing, setComposing] = useState(false)
-  const [isOpenfilter, setIsOpenfilter] = useState(false)
 
   return (
     <div className={styles.main}>
