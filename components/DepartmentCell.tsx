@@ -1,4 +1,3 @@
-// import { Department } from '../../interfaces/segment'
 import styles from './DepartmentCell.module.scss'
 import React from 'react'
 import Link from 'next/link'
