@@ -92,7 +92,8 @@ const LectureSearchBar = (props: LectureSeachBarProps) => {
           className={styles.searchClick}
           onClick={e => {
             e.preventDefault()
-            const PATH = `?searchText=` + props.searchText + 'searchGenre=' + props.applyedGenres.join(',')
+            const PATH =
+              `?searchText=` + props.searchText + 'searchGenre=' + props.applyedGenres.join(',')
             router.push(PATH)
           }}
         >
