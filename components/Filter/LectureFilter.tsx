@@ -167,7 +167,7 @@ const LectureFilter = (props: LectureFilterProps) => {
           onClick={(e) => {
             e.preventDefault()
             props.onApply(selectedGenres)
-            const PATH = `?searchText=` + props.searchText + 'searchGenre=' + props.applyedGenres.join(',')
+            const PATH = `?searchText=` + props.searchText + '&searchGenre=' + props.applyedGenres.join(',')
             router.push(PATH)
           }}
         >
