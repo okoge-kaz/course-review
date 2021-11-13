@@ -8,12 +8,13 @@
 
 .main .text {
   text-align: center;
-  font-weight: bold;
+  font-weight: medium;
   font-size: 16px;
   letter-spacing: 0px;
   color: $footer-text-color;
   padding: 5px 5px 5px 5px;
   .link {
+    font-weight: bold;
     text-decoration: none;
     color: $footer-text-color;
     display: inline-block;
