@@ -12,17 +12,22 @@ interface StaticIndexProps {
 
 const LectureCell = (props: StaticIndexProps) => {
   return (
-    <div className={`${styles.main} ${props.isExist ? styles.exist : styles.nonExist }`}>
-      <Link href={`course/${props.id}`}>
-        <a className={styles.link}>
-          <div>
-            {props.name}
-            <div className={styles.teachers}>
-              {props.teachers.join(', ')}
+    <div className={`${styles.main} ${props.isExist ? styles.exist : styles.nonExist}`}>
+      {props.isExist ? (
+        <Link href={`course/${props.id}`}>
+          <a className={styles.link}>
+            <div>
+              {props.name}
+              <div className={styles.teachers}>{props.teachers.join(', ')}</div>
             </div>
-          </div>
-        </a>
-      </Link>
+          </a>
+        </Link>
+      ) : (
+        <div>
+          {props.name}
+          <div className={styles.teachers}>{props.teachers.join(', ')}</div>
+        </div>
+      )}
     </div>
   )
 }
