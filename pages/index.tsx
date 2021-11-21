@@ -4,10 +4,9 @@ import Head from 'next/head'
 import SubHead from '../components/SubHeader'
 import Content from '../components/Content'
 import { Segment } from '../interfaces/segment'
-import LectureSearchBar from '../components/Search/LectureSearchBar'
+import LectureSearchBar from '../components/Search/LectureSearchBarPlain'
 import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
-import LectureFilter from '../components/Filter/LectureFilter'
 
 interface CourseDetailList {
   courseId: string
@@ -140,20 +139,7 @@ const index = (props: StaticIndexProps) => {
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
-          changeIsOpenFilter={isOpenFilter => setIsOpenfilter(isOpenFilter)}
-          searchText={searchText}
-          applyedGenres={applyedGenres}
         />
-        {isOpenfilter ? (
-          <LectureFilter
-            onApply={genres => setApplyedGenres(genres)}
-            onReset={() => setApplyedGenres([])}
-            searchText={searchText}
-            applyedGenres={applyedGenres}
-          />
-        ) : (
-          <></>
-        )}
         {applyedGenres.length <= 0 ? (
           searchText.length > 0 ? (
             <div className={styles.Container}>
