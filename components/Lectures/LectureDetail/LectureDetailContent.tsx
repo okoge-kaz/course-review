@@ -29,9 +29,7 @@ const reviewersEvaluationText = (reviewersEvaluation: ReviewersEvaluation) => {
     case ReviewersEvaluation.VeryGood:
       return '大変良かった'
     default: {
-      /* eslint no-undef: off */
       const _: never = reviewersEvaluation
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -51,9 +49,7 @@ const understandabilityText = (understandability: Understandability) => {
     case Understandability.VeryEasy:
       return 'かなり分かりやすかった'
     default: {
-      /* eslint no-undef: off */
       const _: never = understandability
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -71,9 +67,7 @@ const examDifficultyText = (examDifficulty: ExamDifficulty) => {
     case ExamDifficulty.Difficult:
       return '難しかった'
     default: {
-      /* eslint no-undef: off */
       const _: never = examDifficulty
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -93,9 +87,7 @@ const attendanceRateText = (attendanceRate: AttendanceRate) => {
     case AttendanceRate.Over80percent:
       return '8割以上'
     default: {
-      /* eslint no-undef: off */
       const _: never = attendanceRate
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -111,9 +103,7 @@ const compulsoryOrElectiveText = (compulsoryOrElective: CompulsoryOrElective) =>
     case CompulsoryOrElective.Elective:
       return '選択'
     default: {
-      /* eslint no-undef: off */
       const _: never = compulsoryOrElective
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -135,9 +125,7 @@ const gradeText = (grade: Grade) => {
     case Grade.Passed:
       return '合格(合否科目の場合)'
     default: {
-      /* eslint no-undef: off */
       const _: never = grade
-      /* eslint no-console: off */
       console.error(`${_} is unexpected value`)
       return ''
     }
@@ -182,12 +170,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
                 <div className={styles.v_line}>
                   {props.courseReview.reviewersEvaluation.distributes.map(distribute => (
                     <div key={distribute.item} className={styles.progressDiv}>
-                      {/* <label
-                      htmlFor={reviewersEvaluationText(distribute.item)}
-                      className={styles.progressLabel}
-                    >
-                      {reviewersEvaluationText(distribute.item)}
-                    </label> */}
                       <div className={styles.label}>{reviewersEvaluationText(distribute.item)}</div>
                       <progress
                         id={reviewersEvaluationText(distribute.item)}
@@ -237,12 +219,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
             <div className={styles.v_line}>
               {props.courseReview.understandability.distributes.map(distribute => (
                 <div key={distribute.item} className={styles.progressDiv}>
-                  {/* <label
-                    htmlFor={understandabilityText(distribute.item)}
-                    className={styles.progressLabel}
-                  >
-                    {understandabilityText(distribute.item)}
-                  </label> */}
                   <div className={styles.label}>{understandabilityText(distribute.item)}</div>
                   <progress
                     id={understandabilityText(distribute.item)}
@@ -270,12 +246,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
             <div className={styles.v_line}>
               {props.courseReview.examDifficulty.distributes.map(distribute => (
                 <div key={distribute.item} className={styles.progressDiv}>
-                  {/* <label
-                    htmlFor={examDifficultyText(distribute.item)}
-                    className={styles.progressLabel}
-                  >
-                    {examDifficultyText(distribute.item)}
-                  </label> */}
                   <div className={styles.label}>{examDifficultyText(distribute.item)}</div>
                   <progress
                     id={examDifficultyText(distribute.item)}
@@ -339,12 +309,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
                   {distribute.item === 6 && distribute.percent > 0 ? (
                     distribute.item === 6 || 1 ? (
                       <>
-                        {/* <label
-                          htmlFor={gradeText(distribute.item)}
-                          className={styles.progressLabel}
-                        >
-                          {gradeText(distribute.item)}
-                        </label> */}
                         <div className={styles.label}>{gradeText(distribute.item)}</div>
                         <progress
                           id={gradeText(distribute.item)}
@@ -359,9 +323,6 @@ const LecturesListContent = (props: StaticIndexProps) => {
                     )
                   ) : distribute.item !== 6 ? (
                     <>
-                      {/* <label htmlFor={gradeText(distribute.item)} className={styles.progressLabel}>
-                        {gradeText(distribute.item)}
-                      </label> */}
                       <div className={styles.label}>{gradeText(distribute.item)}</div>
                       <progress
                         id={gradeText(distribute.item)}

@@ -1,14 +1,12 @@
 import { useState, useMemo } from 'react'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import SubHead from '../components/SubHeader'
 import Content from '../components/Content'
 import { Segment } from '../interfaces/segment'
-import LectureSearchBar from '../components/Search/LectureSearchBar'
+import LectureSearchBar from '../components/Search/LectureSearchBarPlain'
 import LecureCell from '../components/Search/LecureCell'
 import styles from '../styles/index.module.scss'
-import LectureFilter from '../components/Filter/LectureFilter'
 
 interface CourseDetailList {
   courseId: string
@@ -44,29 +42,14 @@ const index = (props: StaticIndexProps) => {
     } else return 0
   }
 
-  const router = useRouter()
-  const currentPath = decodeURI(router.asPath)
-  const searchWordIndex = currentPath.indexOf('searchText=') + 11
-  const searchGenreIndex = currentPath.indexOf('searchGenre=') + 12
-  const searchWords = currentPath.slice(searchWordIndex, searchGenreIndex - 12)
-  const searchGenres = currentPath.slice(searchGenreIndex)
-
-  // console.log('searchword')
-  // console.log(searchWords)
-  // console.log(searchWordIndex)
-  // console.log(searchGenreIndex)
-  // console.log(currentPath.slice(searchWordIndex, (searchGenreIndex-12)))
-  // console.log(searchGenres)
-
-  const splitSearchGenres = searchGenres.split(',')
 
   const title = '逆評定 - Titech Info : 東工大情報サイト'
 
   const filteredLectures = useMemo(() => {
-    if (searchWords.length === 0) {
+    if (searchText.length === 0) {
       return []
     }
-    const splitSearchText = searchWords.replace('　', ' ').split(' ')
+    const splitSearchText = searchText.replace('　', ' ').split(' ')
 
     return props.genreCourses
       .filter(course =>
@@ -79,13 +62,13 @@ const index = (props: StaticIndexProps) => {
         ),
       )
       .sort(compareCourses)
-  }, [props.genreCourses, searchWords])
+  }, [props.genreCourses, searchText])
 
   const filteredLecturesWithGenre = useMemo(() => {
-    const genresNumber: number[] = splitSearchGenres
+    const genresNumber: number[] = applyedGenres
       .filter(genre => genre.includes('番台'))
       .map(genre => Number(genre[0]))
-    const genresDepartments: string[] = splitSearchGenres.filter(genre => !genre.includes('番台'))
+    const genresDepartments: string[] = applyedGenres.filter(genre => !genre.includes('番台'))
 
     const filtercheck = (
       value: string | number,
@@ -101,7 +84,7 @@ const index = (props: StaticIndexProps) => {
       }
     }
 
-    if (searchWords.length === 0) {
+    if (searchText.length === 0) {
       if (genresNumber.length === 0) {
         return props.genreCourses
           .filter(courseDetail =>
@@ -109,7 +92,6 @@ const index = (props: StaticIndexProps) => {
           )
           .sort(compareCourses)
       }
-
       if (genresDepartments.length === 0) {
         return props.genreCourses
           .filter(courseDetail =>
@@ -128,7 +110,7 @@ const index = (props: StaticIndexProps) => {
         .sort(compareCourses)
     }
 
-    const splitSearchText = searchWords.replace('　', ' ').split(' ')
+    const splitSearchText = searchText.replace('　', ' ').split(' ')
 
     return props.genreCourses
       .filter(courseDetail =>
@@ -145,7 +127,7 @@ const index = (props: StaticIndexProps) => {
       )
       .filter(courseDetail => filtercheck(courseDetail.department, genresDepartments, genresNumber))
       .sort(compareCourses)
-  }, [props.genreCourses, searchWords, splitSearchGenres])
+  }, [props.genreCourses, searchText, applyedGenres])
 
   return (
     <div>
@@ -157,23 +139,9 @@ const index = (props: StaticIndexProps) => {
         <LectureSearchBar
           keyInputEvent={keyInputEvent}
           changeIsFilled={isFilled => setIsFilled(isFilled)}
-          changeIsOpenFilter={isOpenFilter => setIsOpenfilter(isOpenFilter)}
-          searchText={searchText}
-          applyedGenres={applyedGenres}
         />
-        {isOpenfilter ? (
-          <LectureFilter
-            onApply={genres => setApplyedGenres(genres)}
-            onReset={() => setApplyedGenres([])}
-            searchText={searchText}
-            applyedGenres={applyedGenres}
-          />
-        ) : (
-          <></>
-        )}
-        {/* {console.log(splitSearchGenres.length)} */}
-        {splitSearchGenres.length <= 1 ? (
-          searchWords.length > 0 ? (
+        {applyedGenres.length <= 0 ? (
+          searchText.length > 0 ? (
             <div className={styles.Container}>
               {filteredLectures.map(lecture => (
                 <LecureCell
