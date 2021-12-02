@@ -16,7 +16,7 @@ class MyDocument extends Document {
             content="https://course-review-tmp.titech.info/images/course-review-ogp.png"
           />
           <meta property="og:title" content="Titech Info" />
-          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+          <link rel="icon" type="image/x-icon" href="favicon.ico" />
           <link
             rel="apple-touch-icon"
             sizes="144x144"
