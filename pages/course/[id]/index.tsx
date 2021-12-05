@@ -11,7 +11,7 @@ interface StaticIndexProps {
 }
 
 const CourseDetailContent = (props: StaticIndexProps) => {
-  const title = 'Titech Info: 逆評定'
+  let title = 'Titech Info: 逆評定'
   if (typeof props.courseAssessment === 'undefined') {
     return (
       <>
@@ -22,6 +22,7 @@ const CourseDetailContent = (props: StaticIndexProps) => {
       </>
     )
   }
+  title = props.courseAssessment.courseName + ' - Titech Info: 逆評定'
   return (
     <>
       <Head>

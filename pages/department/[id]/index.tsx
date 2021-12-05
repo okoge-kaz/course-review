@@ -13,7 +13,7 @@ interface StaticIndexProps {
 }
 
 const DepartmentCoursesList = (props: StaticIndexProps) => {
-  const title = 'Titech Info: 逆評定'
+  const title = props.department.name + ' - Titech Info: 逆評定'
 
   const [searchText, setSearchText] = useState('')
   const [isFilled, setIsFilled] = useState(false)
