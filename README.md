@@ -1,4 +1,4 @@
-# gyaku-hyotei2020
+# course-review
 
 ## 内容
 東京工業大学 逆評定2020Update版リポジトリ
